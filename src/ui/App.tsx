@@ -271,7 +271,7 @@ export default function App() {
       {page === "menu" ? (
         <section className="menu panel">
           <small>
-            방문 기록 / 3구역 · 10전투 / v0.3.3 UI · AI 수치/가중치 시험 적용
+            v0.3.3
           </small>
           <h1>{flavor.story.title}</h1>
           <p>{flavor.story.tagline}</p>

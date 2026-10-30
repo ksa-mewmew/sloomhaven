@@ -1,4 +1,5 @@
 import { RulesGuide } from "./RulesGuide";
+import { enemySymbol } from "./enemySymbols";
 import { EconomyControls } from "./EconomyControls";
 import { statusText } from "../game/status";
 import { StatusHelp } from "./StatusHelp";
@@ -292,7 +293,7 @@ export function BoardView({
             s.player.node === n.id
               ? "@"
               : e
-                ? String.fromCharCode(97 + s.enemies.indexOf(e))
+                ? enemySymbol(e.archetype)
                 : ".";
         return (
           <button
@@ -303,8 +304,8 @@ export function BoardView({
               left: `calc(${n.x} * var(--board-step))`,
               top: `calc(${n.y} * var(--board-step))`,
             }}
-            title={`${n.id}${e && damage[e.id] !== undefined ? ` / 예상 HP −${damage[e.id]}` : ""}`}
-            aria-label={`${n.id} ${glyph}${danger.has(n.id) ? " 위험" : ""}${active.includes(n.id) ? " 이동 후보" : ""}${e && s.prompt?.kind === "effect" && s.prompt.targets.includes(e.id) ? " 유효 대상" : ""}`}
+            title={`${n.id}${e ? ` / [${glyph}] ${enemyFlavor(e.archetype!)?.name ?? e.archetype} · ${e.id}` : ""}${e && damage[e.id] !== undefined ? ` / 예상 HP −${damage[e.id]}` : ""}`}
+            aria-label={`${n.id} ${glyph}${e ? ` ${enemyFlavor(e.archetype!)?.name ?? e.archetype} ${e.id}` : ""}${danger.has(n.id) ? " 위험" : ""}${active.includes(n.id) ? " 이동 후보" : ""}${e && s.prompt?.kind === "effect" && s.prompt.targets.includes(e.id) ? " 유효 대상" : ""}`}
             onMouseEnter={() => onEnemyHover?.(e?.id ?? null)}
             onMouseLeave={() => onEnemyHover?.(null)}
             onFocus={() => onEnemyHover?.(e?.id ?? null)}
@@ -313,6 +314,7 @@ export function BoardView({
           >
             <b>{glyph}</b>
             <small>
+              {e ? `${e.id} ` : ""}
               {predicted.includes(n.id) ? "~" : ""}
               {active.includes(n.id) ? "+" : ""}
               {e &&
@@ -560,9 +562,7 @@ export function BattleScreen({
                   onClick={() => send({ type: "choose", target: id })}
                 >
                   {id} [
-                  {String.fromCharCode(
-                    97 + s.enemies.findIndex((e) => e.id === id),
-                  )}
+                  {enemySymbol(s.enemies.find((e) => e.id === id)?.archetype)}
                   ] ?
                   {(p.step.type === "push" || p.step.type === "pull") &&
                     (() => {
@@ -761,7 +761,7 @@ export function BattleScreen({
             />
           </div>
           <p className="airy-legend">
-            @ 방문자 · 문자: 적 · + 이동 · ! 위협 · * 고정 칸 · ~ 예상 경로
+            @ 방문자 · 적 기호는 종류별 고정 · e번호: 개체 · + 이동 · ! 위협 · * 고정 칸 · ~ 예상 경로
           </p>
           <div className="resource-hud" aria-label="전투 자원">
             <strong>
@@ -786,8 +786,7 @@ export function BattleScreen({
             >
               <header>
                 <h2>
-                  [{String.fromCharCode(97 + s.enemies.indexOf(enemy))}]{" "}
-                  {skin?.name ?? a.name}
+                  [{enemySymbol(enemy.archetype)}] {skin?.name ?? a.name} · {enemy.id}
                 </h2>
                 <button
                   aria-label="적 상세 닫기"
