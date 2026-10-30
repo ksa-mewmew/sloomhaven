@@ -2,6 +2,7 @@ import type { Run } from "./campaign";
 import { ECONOMY_VERSION, itemById, relicById, economyTrial } from "./economy";
 import { assertBattle } from "./engine";
 import { cards, content, encounters } from "./data";
+import { SCENARIO_ID_SCHEME, preserveScenarioSave, remapOldRun } from "./scenarioIds";
 export { LEGACY_SAVE_KEY, LEGACY_ARCHIVE_KEY, PREVIOUS_SAVE_KEY, PREVIOUS_ARCHIVE_KEY, V03_SAVE_KEY, V03_ARCHIVE_KEY, preserveLegacy, preservePrevious, preserveV03, } from "./save-v031";
 export const V031_SAVE_KEY = "askew-apartment/run/v3.1";
 export const V031_ARCHIVE_KEY = "askew-apartment/archive/v0.3.1";
@@ -17,6 +18,7 @@ export function serializeRun(run: Run) {
         saveVersion: 3,
         dataVersion: 3,
         contentVersion: ECONOMY_VERSION,
+        scenarioIdScheme: SCENARIO_ID_SCHEME,
         run,
     });
 }
@@ -28,6 +30,9 @@ export function deserializeRun(text: string): Run {
             d.dataVersion !== 3 ||
             r.contentVersion !== ECONOMY_VERSION)
             throw Error("이전 저장은 원본 보존되며 새 경제로 변환하지 않습니다");
+        if (d.scenarioIdScheme === undefined) remapOldRun(r);
+        else if (d.scenarioIdScheme !== SCENARIO_ID_SCHEME)
+            throw Error("지원하지 않는 시나리오 ID 버전");
         if (![
             "start",
             "shop",
@@ -65,6 +70,16 @@ export function deserializeRun(text: string): Run {
                 new Set(ids).size !== ids.length ||
                 ids.some((id) => !known[id]))
                 throw Error("보유 목록 오류");
+        const variantIds = new Set(Object.values(encounters).flatMap(e => e.variants.map(v => v.id)));
+        if (!Array.isArray(r.choices) || r.choices.some(id => !variantIds.has(id)) ||
+            (r.chosen !== undefined && !encounters[r.chosen]) ||
+            (r.chosenVariant !== undefined && !encounters[r.chosen!]?.variants.some(v => v.id === r.chosenVariant)))
+            throw Error("시나리오 선택 저장 오류");
+        for (const b of [r.initialBattle, ...r.reports].filter(Boolean)) {
+            if (!b || !encounters[b.scenario]?.variants.some(v => v.id === b.variant))
+                throw Error("전투 기록 시나리오 오류");
+            assertBattle(b);
+        }
         if (!Array.isArray(r.equipped) ||
             new Set(r.equipped).size !== r.equipped.length ||
             r.equipped.length > 8 + (r.relics.includes("R03") ? 1 : 0) ||
@@ -91,4 +106,19 @@ export function deserializeRun(text: string): Run {
     catch (e) {
         throw Error("저장 파일을 읽을 수 없습니다: " + String(e));
     }
+}
+export function loadRun(store: Pick<Storage, "getItem" | "setItem">): Run {
+    preserveScenarioSave(store, SAVE_KEY);
+    const text = store.getItem(SAVE_KEY);
+    if (!text) throw Error("저장된 방문이 없습니다");
+    const run = deserializeRun(text);
+    const old = JSON.parse(text);
+    if (old.scenarioIdScheme === undefined && old.run.battle && run.battle) {
+        const before = "askew-apartment/timing/" + old.run.battle.seed + "/" + old.run.battle.variant;
+        const after = "askew-apartment/timing/" + run.battle.seed + "/" + run.battle.variant;
+        const timing = store.getItem(before);
+        if (before !== after && timing !== null && store.getItem(after) === null)
+            store.setItem(after, timing);
+    }
+    return run;
 }

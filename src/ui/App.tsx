@@ -30,7 +30,7 @@ import {
   SAVE_KEY,
   preserveV031,
   V031_ARCHIVE_KEY,
-  deserializeRun,
+  loadRun,
   serializeRun,
   preserveLegacy,
   LEGACY_ARCHIVE_KEY,
@@ -40,6 +40,7 @@ import {
   V03_ARCHIVE_KEY,
 } from "../game/save";
 import type { Battle, Command } from "../game/types";
+import { migrateLocalScenarioRecords, preserveScenarioSave } from "../game/scenarioIds";
 import { battleSummary, runSummary } from "../game/telemetry";
 import {
   BattleScreen,
@@ -85,6 +86,14 @@ export default function App() {
     ),
     [hasSave, setHasSave] = useState(() => !!localStorage.getItem(SAVE_KEY));
   useEffect(() => {
+    try {
+      preserveScenarioSave(localStorage, SAVE_KEY);
+      migrateLocalScenarioRecords(localStorage);
+    } catch (e) {
+      setError("기록 변환 실패 · 원본을 보존했습니다: " + String(e));
+    }
+  }, []);
+  useEffect(() => {
     const sync = () =>
       document.body.style.setProperty(
         "--app-zoom",
@@ -105,6 +114,7 @@ export default function App() {
   useEffect(() => {
     if (run) {
       try {
+        preserveScenarioSave(localStorage, SAVE_KEY);
         localStorage.setItem(SAVE_KEY, serializeRun(run));
         setHasSave(true);
       } catch (e) {
@@ -318,7 +328,7 @@ export default function App() {
               disabled={!hasSave}
               onClick={() =>
                 safe(() => {
-                  setRun(deserializeRun(localStorage.getItem(SAVE_KEY)!));
+                  setRun(loadRun(localStorage));
                   setPage("run");
                 })
               }

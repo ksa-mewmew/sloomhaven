@@ -2134,7 +2134,7 @@
         },
         {
           "id": "S04-B",
-          "label": "옷장과 접시 둘",
+          "label": "옷장과 접시 하나, 먼지 하나",
           "enemies": [
             {
               "id": "e1",
@@ -2148,7 +2148,7 @@
             },
             {
               "id": "e3",
-              "archetype": "grunt",
+              "archetype": "dust",
               "node": "r2c4"
             }
           ]
@@ -2178,7 +2178,7 @@
         },
         {
           "id": "e4",
-          "archetype": "grunt",
+          "archetype": "dust",
           "node": "r2c3"
         }
       ],
@@ -2187,7 +2187,7 @@
       "variants": [
         {
           "id": "S05-A",
-          "label": "잼 병과 접시 셋",
+          "label": "잼 병과 접시 둘, 먼지 하나",
           "enemies": [
             {
               "id": "e1",
@@ -2206,7 +2206,7 @@
             },
             {
               "id": "e4",
-              "archetype": "grunt",
+              "archetype": "dust",
               "node": "r2c3"
             }
           ]
@@ -2480,6 +2480,80 @@
     },
     {
       "id": "S09",
+      "name": "벽 속 복도",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "objective": "kill_all",
+      "designNote": "후반 혼합 조합; 관리실 이전 단계",
+      "variants": [
+        {
+          "id": "S09-A",
+          "label": "뚜껑, 구두, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c4"
+            }
+          ]
+        },
+        {
+          "id": "S09-B",
+          "label": "옷장과 우산",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r0c4"
+            }
+          ]
+        }
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "guard",
+          "node": "r1c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "harrier",
+          "node": "r2c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r0c4"
+        }
+      ]
+    },
+    {
+      "id": "S10",
       "name": "관리실",
       "board": "grid4x4",
       "playerStart": "r2c0",
@@ -2510,7 +2584,7 @@
       "targetEnemyId": "e1",
       "variants": [
         {
-          "id": "S09-A",
+          "id": "S10-A",
           "label": "최후의 심판자와 먼지 셋",
           "enemies": [
             {
@@ -2534,85 +2608,6 @@
               "node": "r3c3"
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "S10",
-      "name": "벽 속 복도",
-      "board": "grid3x5",
-      "playerStart": "r1c0",
-      "objective": "kill_all",
-      "designNote": "후반 혼합 조합; S09 이전 단계",
-      "variants": [
-        {
-          "id": "S10-A",
-          "label": "뚜껑, 구두, 먼지 둘",
-          "enemies": [
-            {
-              "id": "e1",
-              "archetype": "guard",
-              "node": "r1c4"
-            },
-            {
-              "id": "e2",
-              "archetype": "harrier",
-              "node": "r2c4"
-            },
-            {
-              "id": "e3",
-              "archetype": "dust",
-              "node": "r0c3"
-            },
-            {
-              "id": "e4",
-              "archetype": "dust",
-              "node": "r0c4"
-            }
-          ]
-        },
-        {
-          "id": "S10-B",
-          "label": "옷장과 우산, 먼지",
-          "enemies": [
-            {
-              "id": "e1",
-              "archetype": "brute",
-              "node": "r1c4"
-            },
-            {
-              "id": "e2",
-              "archetype": "marksman",
-              "node": "r0c4"
-            },
-            {
-              "id": "e3",
-              "archetype": "dust",
-              "node": "r2c3"
-            }
-          ]
-        }
-      ],
-      "enemies": [
-        {
-          "id": "e1",
-          "archetype": "guard",
-          "node": "r1c4"
-        },
-        {
-          "id": "e2",
-          "archetype": "harrier",
-          "node": "r2c4"
-        },
-        {
-          "id": "e3",
-          "archetype": "dust",
-          "node": "r0c3"
-        },
-        {
-          "id": "e4",
-          "archetype": "dust",
-          "node": "r0c4"
         }
       ]
     }
@@ -2711,11 +2706,11 @@
       },
       {
         "stage": 9,
-        "encounter": "S10"
+        "encounter": "S09"
       },
       {
         "stage": 10,
-        "encounter": "S09"
+        "encounter": "S10"
       }
     ],
     "routeChoice": "choose_one_of_encounter_variants_before_each_stage; fixed single variant for stages 1 and 10",
