@@ -209,7 +209,7 @@ export function BoardView({
     danger = new Set(
       showThreats
         ? projectEnemyPhase(s)
-            .log.filter((l) => l.event === "enemy_attack_attempt")
+            .log.filter((l) => ["enemy_attack_attempt", "enemy_status_attempt"].includes(l.event))
             .flatMap((l) => (l.threatNodes ?? []) as string[])
         : [],
     ),
@@ -739,10 +739,9 @@ export function BattleScreen({
         <section className="airy-center" aria-label="중앙 전장">
           <div className="battle-objective">
             {encounter.objective === "survive"
-              ? encounter.turnLimit + "턴 생존 또는 적 전멸"
+              ? encounter.turnLimit + "번의 적 행동 단계 생존 또는 적 전멸"
               : encounter.objective === "kill_target"
-                ? encounter.turnLimit +
-                  "턴 내 " +
+                ? (encounter.turnLimit === undefined ? "턴 제한 없음 · " : encounter.turnLimit + "턴 내 ") +
                   encounter.targetEnemyId +
                   " 처치"
                 : "승리 조건: 모든 적 처치"}

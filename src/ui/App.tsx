@@ -1173,9 +1173,9 @@ function Scenario({ id, action }: { id: string; action?: React.ReactNode }) {
         <b>
           승리 조건:{" "}
           {s.objective === "survive"
-            ? `${s.turnLimit}턴 생존 또는 전멸`
+            ? `${s.turnLimit}번의 적 행동 단계 생존 또는 전멸`
             : s.objective === "kill_target"
-              ? `${s.turnLimit}턴 내 ${s.targetEnemyId} 처치`
+              ? `${s.turnLimit === undefined ? "턴 제한 없음 · " : s.turnLimit + "턴 내 "}${s.targetEnemyId} 처치`
               : "적 전멸"}
         </b>
       </p>

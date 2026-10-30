@@ -26,7 +26,7 @@ export function simulateIntentPreview(s: Battle, source: Unit) {
         const start = projected.log.find((l) => l.event === "enemy_step" &&
             l.actorId === source.id &&
             l.stepIndex === index);
-        const attempted = projected.log.find((l) => l.event === "enemy_attack_attempt" &&
+        const attempted = projected.log.find((l) => ["enemy_attack_attempt", "enemy_status_attempt"].includes(l.event) &&
             l.actorId === source.id &&
             l.stepIndex === index);
         const cancelled = projected.log.find((l) => ["disarm_skip", "bind_consumed", "followup_skipped"].includes(l.event) &&

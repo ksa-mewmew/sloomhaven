@@ -1,31 +1,31 @@
 {
   "version": "0.3.1-proposal-1",
-  "status": "playtest_proposal_not_approved",
-  "source": "design/v0.3.1/ENEMY_ACTIONS_PROPOSAL.md",
+  "status": "user_revised_2026-10-30_pending_playtest",
+  "source": "CODEX_IMPLEMENTATION_SPEC.md / ENEMY_REVISIONS.md",
   "enemies": {
     "duelist": [
       {
         "id": "advance",
-        "weight": 5,
-        "previewLabel": "다가와 다리 걸기",
+        "weight": 6,
+        "previewLabel": "먼저 후려치고 다가오기",
         "kind": "sequence",
         "steps": [
-          {
-            "kind": "move",
-            "mode": "approach",
-            "maxSteps": 2
-          },
           {
             "kind": "attack",
             "damage": 4,
             "range": 1,
             "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
           }
         ]
       },
       {
         "id": "leave",
-        "weight": 3,
+        "weight": 2,
         "previewLabel": "걷어차고 물러나기",
         "kind": "sequence",
         "steps": [
@@ -85,7 +85,7 @@
           },
           {
             "kind": "attack",
-            "damage": 4,
+            "damage": 3,
             "range": 1,
             "targetPolicy": "player_current"
           }
@@ -94,7 +94,7 @@
       {
         "id": "shard_cut",
         "weight": 4,
-        "previewLabel": "깨진 모서리로 긁기",
+        "previewLabel": "깨진 모서리로 출혈 내기",
         "kind": "sequence",
         "steps": [
           {
@@ -103,13 +103,12 @@
             "maxSteps": 1
           },
           {
-            "kind": "attack",
-            "damage": 2,
+            "kind": "status",
             "range": 1,
             "targetPolicy": "player_current",
             "status": {
               "status": "bleed",
-              "stacks": 1
+              "stacks": 2
             }
           }
         ]
@@ -148,7 +147,7 @@
           },
           {
             "kind": "attack",
-            "damage": 4,
+            "damage": 3,
             "range": 1,
             "targetPolicy": "player_current"
           },
@@ -209,7 +208,7 @@
           },
           {
             "kind": "attack",
-            "damage": 3,
+            "damage": 2,
             "range": 1,
             "targetPolicy": "player_current"
           }
@@ -224,7 +223,7 @@
           {
             "kind": "move",
             "mode": "approach",
-            "maxSteps": 1
+            "maxSteps": 2
           },
           {
             "kind": "attack",
@@ -272,7 +271,7 @@
         "steps": [
           {
             "kind": "marked",
-            "damage": 6,
+            "damage": 5,
             "range": 4,
             "targetPolicy": "marked_tile"
           }
@@ -286,8 +285,8 @@
         "steps": [
           {
             "kind": "attack",
-            "damage": 3,
-            "range": 3,
+            "damage": 2,
+            "range": 2,
             "targetPolicy": "player_current"
           },
           {
@@ -326,13 +325,12 @@
         "kind": "sequence",
         "steps": [
           {
-            "kind": "attack",
-            "damage": 2,
+            "kind": "status",
             "range": 2,
             "targetPolicy": "player_current",
             "status": {
               "status": "poison",
-              "stacks": 1
+              "stacks": 2
             }
           },
           {
@@ -344,7 +342,7 @@
       },
       {
         "id": "cloud",
-        "weight": 3,
+        "weight": 4,
         "previewLabel": "뚜껑 열어 놓기",
         "kind": "sequence",
         "steps": [
@@ -362,7 +360,7 @@
       },
       {
         "id": "keep_venom",
-        "weight": 2,
+        "weight": 1,
         "previewLabel": "거리 잡고 잼 튀기기",
         "kind": "sequence",
         "steps": [
@@ -373,13 +371,12 @@
             "preferredRange": 2
           },
           {
-            "kind": "attack",
-            "damage": 3,
+            "kind": "status",
             "range": 2,
             "targetPolicy": "player_current",
             "status": {
               "status": "poison",
-              "stacks": 1
+              "stacks": 2
             }
           }
         ]
@@ -389,25 +386,25 @@
       {
         "id": "strike",
         "weight": 5,
-        "previewLabel": "다가와 문짝 휘두르기",
+        "previewLabel": "문짝 휘두르고 다가오기",
         "kind": "sequence",
         "steps": [
-          {
-            "kind": "move",
-            "mode": "approach",
-            "maxSteps": 2
-          },
           {
             "kind": "attack",
             "damage": 6,
             "range": 1,
             "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
           }
         ]
       },
       {
         "id": "double",
-        "weight": 3,
+        "weight": 4,
         "previewLabel": "문짝 연달아 닫기",
         "kind": "sequence",
         "steps": [
@@ -427,7 +424,7 @@
       },
       {
         "id": "windup",
-        "weight": 2,
+        "weight": 1,
         "previewLabel": "들이받고 서랍 흔들기",
         "kind": "sequence",
         "steps": [
@@ -511,19 +508,24 @@
       {
         "id": "chase",
         "weight": 5,
-        "previewLabel": "따라와 붙잡기",
+        "previewLabel": "붙잡고 뒤쫓기",
         "kind": "sequence",
         "steps": [
           {
             "kind": "move",
             "mode": "approach",
-            "maxSteps": 3
+            "maxSteps": 1
           },
           {
             "kind": "attack",
             "damage": 4,
             "range": 1,
             "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
           }
         ]
       },
@@ -589,7 +591,7 @@
           },
           {
             "kind": "attack",
-            "damage": 6,
+            "damage": 5,
             "range": 1,
             "targetPolicy": "player_current"
           }
@@ -789,8 +791,7 @@
         "kind": "sequence",
         "steps": [
           {
-            "kind": "attack",
-            "damage": 1,
+            "kind": "status",
             "range": 2,
             "targetPolicy": "player_current",
             "status": {

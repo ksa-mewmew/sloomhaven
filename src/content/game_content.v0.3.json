@@ -1498,7 +1498,7 @@
     {
       "id": "guard",
       "name": "방패병",
-      "hp": 16,
+      "hp": 15,
       "preTurnMove": {
         "mode": "approach",
         "steps": 1
@@ -1812,7 +1812,7 @@
     {
       "id": "boss",
       "name": "최후의 심판자",
-      "hp": 42,
+      "hp": 40,
       "preTurnMove": {
         "mode": "approach",
         "steps": 1
@@ -1862,7 +1862,7 @@
           ]
         }
       ],
-      "phase2AtHp": 21,
+      "phase2AtHp": 20,
       "phase2AttackBonus": 1
     },
     {
@@ -2044,8 +2044,8 @@
         }
       ],
       "objective": "survive",
-      "turnLimit": 5,
-      "designNote": "5번의 적 행동 단계에서 살아남기",
+      "turnLimit": 7,
+      "designNote": "7번의 적 행동 단계에서 살아남기",
       "variants": [
         {
           "id": "S03-A",
@@ -2262,8 +2262,7 @@
         }
       ],
       "objective": "kill_target",
-      "turnLimit": 7,
-      "designNote": "7턴 이내 시계공 처치",
+      "designNote": "지각한 시계 처치 · 턴 제한 없음",
       "targetEnemyId": "e1",
       "variants": [
         {
@@ -2427,8 +2426,8 @@
         }
       ],
       "objective": "survive",
-      "turnLimit": 6,
-      "designNote": "6턴 생존 또는 적 전멸",
+      "turnLimit": 7,
+      "designNote": "7번의 적 행동 단계 생존 또는 적 전멸",
       "variants": [
         {
           "id": "S08-A",
@@ -2507,8 +2506,7 @@
         }
       ],
       "objective": "kill_target",
-      "turnLimit": 9,
-      "designNote": "9턴 이내 보스 처치",
+      "designNote": "돌아오라는 현관문 처치 · 턴 제한 없음",
       "targetEnemyId": "e1",
       "variants": [
         {

@@ -43,7 +43,7 @@ export function compactIntent(i: IntentStep, buff = 0, weak = 0): string {
     if (i.kind === "push" || i.kind === "pull")
         return `${i.kind === "push" ? "밀치기" : "당기기"} ${i.distance} · 적중 대상`;
     if (i.kind === "status")
-        return `독립 ${i.status ? statusNames[i.status.status] : "상태"} ${i.status?.stacks}`;
+        return `상태 부여 · 추적 (사거리 ${i.range ?? 1}) ${i.status ? statusNames[i.status.status] : "상태"} ${i.status?.stacks} · 직접 피해 없음`;
     if (i.kind === "attack" || i.kind === "marked" || i.kind === "adjacent_all")
         return `${i.kind === "marked" ? `표식${i.range ?? 1}` : i.kind === "attack" ? `추적R${i.range ?? 1}` : "인접"} 공${attackAmounts(i, buff, weak).replaceAll(" ", "")}${i.status ? ` ${statusNames[i.status.status]}${i.status.stacks}` : ""}`;
     return `${i.kind === "block" ? "방" : i.kind === "heal" ? "회복" : "공격력+"}${i.amount}`;

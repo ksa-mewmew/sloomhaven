@@ -679,6 +679,13 @@ function pump(s: Battle) {
                         force(s, e, s.player, i.distance ?? 1, i.kind);
                 }
                 else if (i.kind === "status") {
+                    log(s, "enemy_status_attempt", e.id, {
+                        actorId: e.id,
+                        stepIndex: t.index,
+                        threatNodes: stepThreats(s, e, i, t.index),
+                        range: i.range ?? 1,
+                        status: i.status,
+                    });
                     if ((i.targetPolicy !== "last_attack_target" ||
                         e.lastHitTarget === "player") &&
                         enemyTargets(s, e, i, t.index).length &&
@@ -776,7 +783,7 @@ function pump(s: Battle) {
 }
 function enqueueEnemies(s: Battle) {
     const e = encounters[s.scenario];
-    if (e.objective === "kill_target" && s.turn >= e.turnLimit!) {
+    if (e.objective === "kill_target" && e.turnLimit !== undefined && s.turn >= e.turnLimit) {
         s.phase = "defeat";
         s.reason = "시간 초과";
         log(s, "result", s.reason);

@@ -1,6 +1,6 @@
 import { StatusHelp } from "./StatusHelp";
 
-/** Public-facing rules; keep this aligned with the live engine and economy rules. */
+
 export function GameGuide() {
     return (<div className="game-guide">
       <section className="guide-section">

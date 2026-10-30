@@ -1874,3 +1874,9 @@ main.deck-page {
 .hand-card.expanded:last-child > .card {
   translate: 0 0;
 }
+
+.rules-guide { line-height: 1.7; }
+.rules-guide h2 { margin-top: 2rem; }
+.rules-table-scroll { overflow-x: auto; max-width: 100%; }
+.rules-table-scroll table { width: 100%; border-collapse: collapse; }
+.rules-table-scroll th, .rules-table-scroll td { padding: .6rem; border: 1px solid var(--border, #60758a); text-align: left; }
