@@ -1,0 +1,753 @@
+{
+  "encounters": [
+    {
+      "id": "S01",
+      "name": "1층 복도 — 처음부터 소란",
+      "board": "grid2x7",
+      "playerStart": "r0c1",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "duelist",
+          "node": "r0c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r1c3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r1c5"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "첫 전투: 의자+먼지 둘, 위치 선택/광역/연속 공격 가치를 3~5턴 안에 학습. 체력만 늘리기 금지",
+      "variants": [
+        {
+          "id": "S01-A",
+          "label": "복도의 의자와 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "duelist",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r1c3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "name": "공동 세탁실",
+      "board": "grid2x7",
+      "playerStart": "r0c1",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "grunt",
+          "node": "r0c5"
+        },
+        {
+          "id": "e2",
+          "archetype": "grunt",
+          "node": "r1c5"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r0c6"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r1c6"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "초기 다수전; 광역 공격 가치 측정",
+      "variants": [
+        {
+          "id": "S02-A",
+          "label": "접시 둘과 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "grunt",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c6"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r1c6"
+            }
+          ]
+        },
+        {
+          "id": "S02-B",
+          "label": "뚜껑 하나와 먼지들",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r1c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "name": "순환 계단",
+      "board": "ring8",
+      "playerStart": "r0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "hunter",
+          "node": "r4"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r5"
+        }
+      ],
+      "objective": "survive",
+      "turnLimit": 7,
+      "designNote": "7번의 적 행동 단계에서 살아남기",
+      "variants": [
+        {
+          "id": "S03-A",
+          "label": "그림자와 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r5"
+            }
+          ]
+        },
+        {
+          "id": "S03-B",
+          "label": "그림자와 작은 접시",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "name": "막힌 현관",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "brute",
+          "node": "r1c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r2c3"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "거센 단일 적과 약한 다수",
+      "variants": [
+        {
+          "id": "S04-A",
+          "label": "옷장과 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        },
+        {
+          "id": "S04-B",
+          "label": "옷장과 접시 하나, 먼지 하나",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "name": "냉장고 속",
+      "board": "grid3x5",
+      "playerStart": "r1c1",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "poisoner",
+          "node": "r0c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "grunt",
+          "node": "r1c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "grunt",
+          "node": "r2c4"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r2c3"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "중독과 다수전",
+      "variants": [
+        {
+          "id": "S05-A",
+          "label": "잼 병과 접시 둘, 먼지 하나",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        },
+        {
+          "id": "S05-B",
+          "label": "잼 병과 먼지 셋",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r1c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r0c3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "name": "고장 난 엘리베이터",
+      "board": "fork10",
+      "playerStart": "s0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "clockmaker",
+          "node": "a2"
+        },
+        {
+          "id": "e2",
+          "archetype": "marksman",
+          "node": "b2"
+        }
+      ],
+      "objective": "kill_target",
+      "designNote": "지각한 시계 처치 · 턴 제한 없음",
+      "targetEnemyId": "e1",
+      "variants": [
+        {
+          "id": "S06-A",
+          "label": "시계공과 사수",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a2"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "b2"
+            }
+          ]
+        },
+        {
+          "id": "S06-B",
+          "label": "시계공과 접시 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a2"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "b1"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "b2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "name": "옥상",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "marksman",
+          "node": "r0c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "marksman",
+          "node": "r2c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "harrier",
+          "node": "r1c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e5",
+          "archetype": "dust",
+          "node": "r2c3"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "장거리 압박과 우선순위 선택",
+      "variants": [
+        {
+          "id": "S07-A",
+          "label": "우산 둘과 구두, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r1c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        },
+        {
+          "id": "S07-B",
+          "label": "우산 하나, 구두 둘, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r1c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "name": "404호",
+      "board": "ring8",
+      "playerStart": "r0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "arbiter",
+          "node": "r4"
+        },
+        {
+          "id": "e2",
+          "archetype": "harrier",
+          "node": "r2"
+        },
+        {
+          "id": "e3",
+          "archetype": "harrier",
+          "node": "r6"
+        }
+      ],
+      "objective": "survive",
+      "turnLimit": 7,
+      "designNote": "7번의 적 행동 단계 생존 또는 적 전멸",
+      "variants": [
+        {
+          "id": "S08-A",
+          "label": "재판관과 구두 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r6"
+            }
+          ]
+        },
+        {
+          "id": "S08-B",
+          "label": "재판관과 접시 둘, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S09",
+      "name": "벽 속 복도",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "objective": "kill_all",
+      "designNote": "후반 혼합 조합; 관리실 이전 단계",
+      "variants": [
+        {
+          "id": "S09-A",
+          "label": "뚜껑, 구두, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c4"
+            }
+          ]
+        },
+        {
+          "id": "S09-B",
+          "label": "옷장과 우산",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r0c4"
+            }
+          ]
+        }
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "guard",
+          "node": "r1c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "harrier",
+          "node": "r2c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r0c4"
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "name": "관리실",
+      "board": "grid4x4",
+      "playerStart": "r2c0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "boss",
+          "node": "r1c3"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r2c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r3c3"
+        }
+      ],
+      "objective": "kill_target",
+      "designNote": "돌아오라는 현관문 처치 · 턴 제한 없음",
+      "targetEnemyId": "e1",
+      "variants": [
+        {
+          "id": "S10-A",
+          "label": "최후의 심판자와 먼지 셋",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "boss",
+              "node": "r1c3"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "c17": {
+    "id": "C17",
+    "name": "고통 감수",
+    "pool": "reward",
+    "top": {
+      "loss": false,
+      "steps": [
+        {
+          "type": "self_hp_loss",
+          "amount": 2
+        },
+        {
+          "type": "attack",
+          "damage": 8,
+          "range": 1
+        }
+      ]
+    },
+    "bottom": {
+      "loss": false,
+      "steps": [
+        {
+          "type": "self_hp_loss",
+          "amount": 2
+        },
+        {
+          "type": "move",
+          "distance": 4
+        }
+      ]
+    }
+  }
+}

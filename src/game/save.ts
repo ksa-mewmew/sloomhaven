@@ -3,6 +3,8 @@ import { ECONOMY_VERSION, itemById, relicById, economyTrial } from "./economy";
 import { assertBattle } from "./engine";
 import { cards, content, encounters } from "./data";
 import { SCENARIO_ID_SCHEME, preserveScenarioSave, remapOldRun } from "./scenarioIds";
+import legacyPhase0 from "../content/legacy-phase0.json";
+import { LEGACY_RULES, PHASE1 } from "./rulesets";
 export { LEGACY_SAVE_KEY, LEGACY_ARCHIVE_KEY, PREVIOUS_SAVE_KEY, PREVIOUS_ARCHIVE_KEY, V03_SAVE_KEY, V03_ARCHIVE_KEY, preserveLegacy, preservePrevious, preserveV03, } from "./save-v031";
 export const V031_SAVE_KEY = "askew-apartment/run/v3.1";
 export const V031_ARCHIVE_KEY = "askew-apartment/archive/v0.3.1";
@@ -19,6 +21,7 @@ export function serializeRun(run: Run) {
         dataVersion: 3,
         contentVersion: ECONOMY_VERSION,
         scenarioIdScheme: SCENARIO_ID_SCHEME,
+        foundationVersion: 1,
         run,
     });
 }
@@ -33,6 +36,21 @@ export function deserializeRun(text: string): Run {
         if (d.scenarioIdScheme === undefined) remapOldRun(r);
         else if (d.scenarioIdScheme !== SCENARIO_ID_SCHEME)
             throw Error("지원하지 않는 시나리오 ID 버전");
+        if (d.foundationVersion === undefined) {
+            if (r.maxHp < 40) throw Error("이전 HP 규칙을 안전하게 식별할 수 없습니다");
+            r.ruleset = LEGACY_RULES;
+            r.medkits = 0;
+            for (const b of [r.battle, r.initialBattle, ...(r.reports ?? [])]) if (b) {
+                b.ruleset = LEGACY_RULES;
+                b.boardId = legacyPhase0.encounters.find(e => e.id === b.scenario)?.board;
+                b.partyMode = "solo";
+                b.medkits = 0;
+            }
+        } else if (d.foundationVersion !== 1) throw Error("지원하지 않는 전장/HP 규칙 버전");
+        if (![LEGACY_RULES, PHASE1].includes(r.ruleset) || !Number.isInteger(r.medkits) || r.medkits < 0)
+            throw Error("방문 규칙 또는 응급약 저장 오류");
+        if (r.battle && (r.battle.ruleset !== r.ruleset || (r.stage === "battle" && r.battle.medkits !== r.medkits)))
+            throw Error("전투와 방문의 응급약/규칙 불일치");
         if (![
             "start",
             "shop",

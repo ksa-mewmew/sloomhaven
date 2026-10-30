@@ -1,5 +1,12 @@
 export type Status = "poison" | "weak" | "exposed" | "disarm" | "bind" | "bleed";
 export type Side = "top" | "bottom";
+export type PartyMode = "solo" | "duo";
+export type CharacterId = "wanderer" | "mail_carrier";
+export type EncounterModeConfig = {
+    boardId: string;
+    playerStartNodes: string[];
+    enemies: { id: string; archetype: string; node: string }[];
+};
 export interface Step {
     basic?: boolean;
     type: string;
@@ -208,6 +215,10 @@ export interface Battle {
     };
     version: 3;
     contentVersion: "0.3.1-proposal-1" | "0.3.2-economy-trial-1";
+    ruleset?: import("./rulesets").Ruleset;
+    boardId?: string;
+    partyMode?: PartyMode;
+    medkits?: number;
     scenario: string;
     variant: string;
     seed: string;
@@ -259,7 +270,7 @@ export interface Battle {
     startHp: number;
     elapsedSeconds?: number;
 }
-export type Command = {
+export type Command = { type: "medkit" } | {
     type: "item";
     id: string;
     target?: string;

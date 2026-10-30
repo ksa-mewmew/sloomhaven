@@ -2,7 +2,7 @@ import { boards, encounters } from "./data";
 import type { Battle, Board, IntentStep, Step } from "./types";
 import { planForcedMove } from "./movement";
 import { intentSteps } from "./intents";
-export const boardOf = (s: Battle) => boards[encounters[s.scenario].board];
+export const boardOf = (s: Battle) => boards[s.boardId ?? encounters[s.scenario].board];
 export function neighbors(b: Board, node: string) {
     return b.edges
         .flatMap(([a, c]) => (a === node ? [c] : c === node ? [a] : []))

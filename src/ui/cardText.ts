@@ -2,6 +2,15 @@ import { statusNames } from "../game/status";
 import type { Step, IntentStep } from "../game/types";
 import type { Battle } from "../game/types";
 import { faceSteps } from "../game/engine";
+import type { simulateIntentPreview } from "../game/preview";
+export function projectedIntentText(steps: ReturnType<typeof simulateIntentPreview>["steps"], buff = 0, weak = 0) {
+    return steps.map(x => {
+        const text = intentText(x.step, buff, weak);
+        weak = Math.max(0, weak - x.hits.length);
+        if (x.step.kind === "buff_attack") buff += x.step.amount ?? 0;
+        return text;
+    }).join(" → ");
+}
 function attackAmounts(i: IntentStep, buff: number, weak: number) {
     const values = Array.from({ length: i.hits ?? 1 }, (_, hit) => Math.max(0, (i.damage ?? 0) + buff - (weak > hit ? 2 : 0)));
     return new Set(values).size === 1
@@ -51,7 +60,7 @@ export function compactIntent(i: IntentStep, buff = 0, weak = 0): string {
 export function describe(x: Step): string {
     const range = x.range === "any"
         ? " · 거리 무제한"
-        : x.range
+        : x.range && !(x.type === "attack" && x.range === 1)
             ? ` · 사거리 ${x.range}`
             : "";
     const cond: Record<string, string> = {
@@ -95,7 +104,7 @@ export function intentText(i: IntentStep, buff = 0, weak = 0): string {
         i.kind === "status")
         return compactIntent(i, buff, weak);
     return ["attack", "marked", "adjacent_all"].includes(i.kind)
-        ? `${i.kind === "marked" ? `표식 (사거리 ${i.range ?? 1})` : i.kind === "attack" ? `추적 (사거리 ${i.range ?? 1})` : "인접 전체 (거리 1)"} 공격 ${attackAmounts(i, buff, weak)}${i.status ? ` + ${statusNames[i.status.status]} ${i.status.stacks}` : ""}`
+        ? `${i.kind === "marked" ? `지정 칸 (사거리 ${i.range ?? 1}) ` : i.kind === "attack" && (i.range ?? 1) > 1 ? `사거리 ${i.range} ` : i.kind === "adjacent_all" ? "인접 전체 " : ""}공격 ${attackAmounts(i, buff, weak).replace(" ×1", "")}${i.status ? ` + ${statusNames[i.status.status]} ${i.status.stacks}` : ""}`
         : i.kind === "block"
             ? `방어도 ${i.amount}`
             : i.kind === "heal"

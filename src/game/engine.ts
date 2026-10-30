@@ -6,6 +6,8 @@ import { intentSteps, isAttackIntent } from "./intents";
 import { random, sample, seedNumber } from "./rng";
 import { replaceRecovery, statusKeys, statusNames } from "./status";
 import { calculateHit } from "./combat";
+import legacyPhase0 from "../content/legacy-phase0.json";
+import { PHASE1, LEGACY_RULES, rulesDefaults, type Ruleset } from "./rulesets";
 import type { Action, Battle, Command, Side, Step, Task, Unit } from "./types";
 export function log(s: Battle, event: string, detail: string, fields: Record<string, unknown> = {}) {
     s.log.push({
@@ -35,20 +37,27 @@ function unit(id: string, node: string, hp: number): Unit {
         buff: 0,
     };
 }
-export function createBattle(scenario = "S01", seed = "holiday", deck = content.character.initialEquippedCards, hp = 40, maxHp = 40, relics: string[] = [], upgrades: Record<string, Side[]> = {}, variant?: string, economy?: {
+export function createBattle(scenario = "S01", seed = "holiday", deck = content.character.initialEquippedCards, hp = content.character.maxHp, maxHp = content.character.maxHp, relics: string[] = [], upgrades: Record<string, Side[]> = {}, variant?: string, economy?: {
     items: string[];
+    ruleset?: Ruleset;
+    medkits?: number;
 }): Battle {
     if (!encounters[scenario] ||
         new Set(deck).size !== deck.length ||
         deck.some((id) => !cards[id]) ||
         deck.length < 2)
         throw Error("잘못된 전투/덱");
-    const e = encounters[scenario];
+    const ruleset = economy?.ruleset ?? rulesDefaults.ruleset;
+    const e = economy?.ruleset === LEGACY_RULES ? legacyPhase0.encounters.find(e => e.id === scenario)! : encounters[scenario];
     const chosen = e.variants.find((v) => v.id === (variant ?? e.variants[0].id));
     if (!chosen)
         throw Error("존재하지 않는 전투 변형");
     const s: Battle = {
         version: 3,
+        ruleset,
+        boardId: e.board,
+        partyMode: "solo",
+        medkits: economy?.medkits ?? 0,
         contentVersion: "0.3.1-proposal-1",
         scenario,
         variant: chosen.id,
@@ -607,7 +616,7 @@ function pump(s: Battle) {
                     s.reason = "상단 완료 — 추가 이동 또는 계속";
                 }
                 if (s.economy &&
-                    s.economy.items.length &&
+                    (s.economy.items.length || ((s.medkits ?? 0) > 0 && s.player.hp < s.player.maxHp)) &&
                     s.queue[0]?.kind !== "playerEnd") {
                     s.phase = "ready";
                     s.reason = "카드 면 사이 · 아이템 또는 계속";
@@ -793,8 +802,8 @@ function enqueueEnemies(s: Battle) {
         s.queue.push({ kind: "enemy", id: u.id }, { kind: "tick", id: u.id });
     s.queue.push({ kind: "end" });
 }
-export function faceSteps(s: Pick<Battle, "upgrades">, a: Action): Step[] {
-    const f = cards[a.card][a.side];
+export function faceSteps(s: Pick<Battle, "upgrades" | "ruleset">, a: Action): Step[] {
+    const f = s.ruleset === LEGACY_RULES && a.card === "C17" ? legacyPhase0.c17[a.side] : cards[a.card][a.side];
     const steps: Step[] = a.basic
         ? [
             a.side === "top"
@@ -818,6 +827,18 @@ export function applyCommand(state: Battle, c: Command): Battle {
         !["0.3.1-proposal-1", ECONOMY_VERSION].includes(state.contentVersion))
         throw Error("전투 콘텐츠 버전 불일치: 새 v0.3 전투를 시작하세요");
     const s = structuredClone(state);
+    if (c.type === "medkit") {
+        const reason = medkitUnavailable(s);
+        if (reason) throw Error(reason);
+        s.medkits!--;
+        log(s, "medkit_use", "응급약 사용", { remaining: s.medkits });
+        const before = s.player.hp;
+        heal(s, s.player, 6);
+        log(s, "medkit_heal", "응급약 회복 처리", { amount: s.player.hp - before, remaining: s.medkits });
+        s.commands.push(structuredClone(c));
+        assertBattle(s);
+        return s;
+    }
     if (c.type === "recordMetrics") {
         if (!["victory", "defeat"].includes(s.phase) ||
             !Number.isFinite(c.elapsedSeconds) ||
@@ -1105,6 +1126,8 @@ function finishRest(s: Battle, id: string) {
     log(s, "rest", `소실 ${id}, 나머지 회수`);
 }
 export function assertBattle(s: Battle) {
+    if (s.medkits !== undefined && (!Number.isInteger(s.medkits) || s.medkits < 0))
+        throw Error("응급약 수량 오류");
     if (s.economy) {
         const e = s.economy;
         if (!Array.isArray(e.items) ||
@@ -1134,6 +1157,14 @@ export function assertBattle(s: Battle) {
 }
 export function replay(initial: Battle, commands: Command[]) {
     return commands.reduce(applyCommand, initial);
+}
+export function medkitUnavailable(s: Battle) {
+    if (s.ruleset !== PHASE1) return "이전 규칙에서는 응급약을 사용하지 않습니다";
+    if (!(s.medkits! > 0)) return "남은 응급약이 없습니다";
+    if (s.phase !== "ready" || s.prompt || s.economy?.startPending.length || (s.reason && !s.economy?.pauseFaces))
+        return "플레이어 행동 대기 또는 두 카드 면 사이에만 사용합니다";
+    if (s.player.hp >= s.player.maxHp) return "HP가 최대입니다";
+    return "";
 }
 export function itemAvailable(s: Battle, id: string) {
     if (!s.economy ||

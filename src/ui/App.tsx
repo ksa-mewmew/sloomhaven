@@ -1,3 +1,6 @@
+import legacyPhase0 from "../content/legacy-phase0.json";
+import { LEGACY_RULES } from "../game/rulesets";
+import { validateFoundation } from "../game/foundation";
 import { RulesGuide } from "./RulesGuide";
 import { economy, economyTrial, itemById, relicById } from "../game/economy";
 import { DeckEditor, CardComparison, UpgradePicker } from "./DeckEditor";
@@ -71,7 +74,7 @@ export default function App() {
     [practiceInitial, setPI] = useState<Battle>(),
     [error, setError] = useState(""),
     [seed, setSeed] = useState("holiday-2026"),
-    [hp, setHp] = useState(40),
+    [hp, setHp] = useState(20),
     [practiceOwned, setPO] = useState<string[]>([
       ...content.character.initialOwnedCards,
     ]),
@@ -207,6 +210,7 @@ export default function App() {
           key={current.scenario + current.seed + page}
           battle={current}
           gold={page === "run" ? run?.gold : undefined}
+          onMedkit={page === "run" ? () => send({type:"medkit"}) : undefined}
           progress={
             page === "run" && run
               ? `${
@@ -228,10 +232,7 @@ export default function App() {
               if (page === "practiceBattle")
                 setBattle(structuredClone(practiceInitial!));
               else
-                setRun({
-                  ...run!,
-                  battle: structuredClone(run!.initialBattle!),
-                });
+                setRun(applyRunCommand(run!, { type: "retryBattle" }));
             })
           }
           onResult={(metrics) =>
@@ -275,7 +276,7 @@ export default function App() {
       {banner}
       {rulesOpen && (
         <Modal title="규칙 안내" close={() => setRulesOpen(false)}>
-          <RulesGuide />
+          <RulesGuide legacy={page === "run" && run?.ruleset === LEGACY_RULES} />
         </Modal>
       )}
       {page === "menu" ? (
@@ -365,7 +366,7 @@ export default function App() {
             <section className="menu panel">
               <small>새 방문 등록</small>
               <h1>{flavor.classes.visitor.title}</h1>
-              <h3>방문자 · 체력 40 · 출전 8장</h3>
+              <h3>방문자 · 체력 20 · 출전 8장</h3>
               <p>{flavor.classes.visitor.intro}</p>
               <p>{flavor.classes.visitor.selection}</p>
               {Object.entries(flavor.classes)
@@ -509,7 +510,7 @@ export default function App() {
               <button
                 onClick={() =>
                   safe(() => {
-                    validateContent();
+                    validateContent(); validateFoundation();
                     location.reload();
                   })
                 }
@@ -717,7 +718,7 @@ export default function App() {
             <>
               <header className="battleHeader">
                 <div>
-                  <small>시드 {run.seed}</small>
+                  <small>{run.ruleset === LEGACY_RULES ? "이전 규칙 · HP40/구 전장 방문 · " : ""}시드 {run.seed}</small>
                   <h1>
                     {(
                       flavor.story.zones as Record<
@@ -793,10 +794,10 @@ export default function App() {
                     </p>
                   )}
                   <h2>
-                    {run.stage === "start"
+                    {run.stage === "zoneRest" && run.ruleset !== LEGACY_RULES ? "응급약 1개를 보급합니다. HP 회복은 지급하지 않습니다." : run.stage === "start"
                       ? flavor.menus.startReward
                       : run.stage === "zoneRest"
-                        ? flavor.menus.zoneBreak + " · HP +8 전용"
+                        ? (run.ruleset === LEGACY_RULES ? flavor.menus.zoneBreak + " · HP +8 전용" : "구역 보급 · 응급약 +1")
                         : flavor.menus.battleReward}
                   </h2>
                   <p>
@@ -804,12 +805,13 @@ export default function App() {
                       ? "기본 자금 100G 지급 완료. 추가 지급 없이 시작 상점으로 진행합니다."
                       : run.stage === "reward"
                         ? `골드 +${run.rewardGold}G 지급 완료. 추가 보상은 ${run.rewardType} 한 종류입니다.`
-                        : "HP 8 회복만 제공합니다. 강화 기능은 보존하되 현재 진입은 비활성화했습니다."}
+                        : "구역 보급을 받습니다. 강화 기능은 현재 비활성화했습니다."}
                   </p>
                   <CardComparison
                     owned={run.owned}
                     equipped={run.equipped}
                     upgrades={run.upgrades}
+                    ruleset={run.ruleset}
                   />
                   <p>
                     회복은 출혈이 있으면 그 효과 한 번을 소모해 출혈만
@@ -862,7 +864,7 @@ export default function App() {
                               <div>
                                 {reward.cards?.map((id) => (
                                   <div key={id}>
-                                    <CardView id={id} />
+                                    <CardView id={id} ruleset={run.ruleset} />
                                     <button
                                       className="primary"
                                       onClick={() =>
@@ -882,6 +884,7 @@ export default function App() {
                               <UpgradePicker
                                 options={upgradesAvailable(run)}
                                 upgrades={run.upgrades}
+                    ruleset={run.ruleset}
                                 onChoose={(card, side) =>
                                   send({
                                     type: "reward",
@@ -965,7 +968,7 @@ export default function App() {
                         {x.kind === "card" && (
                           <details>
                             <summary>카드 양면 상세</summary>
-                            <CardView id={x.id} />
+                            <CardView id={x.id} ruleset={run.ruleset} />
                           </details>
                         )}
                         {x.kind === "relic" && (
@@ -1062,6 +1065,7 @@ export default function App() {
                   capacity={capacity(run)}
                   minimum={8}
                   upgrades={run.upgrades}
+                    ruleset={run.ruleset}
                   onSave={(ids) => send({ type: "equip", ids })}
                   onStart={() => send({ type: "startBattle" })}
                 />
@@ -1142,6 +1146,7 @@ export default function App() {
   );
 }
 function rewardTitle(r: Reward) {
+  if (r.id === "zone-medkit") return "응급약 +1";
   if (r.kind === "continue") return "시작 상점으로 · 기본 100G";
   if (r.kind === "item") return "아이템 최대 2개 중 1개";
   if (r.kind === "empty") return "후보 풀 고갈 · 추가 30G 수령";
@@ -1155,9 +1160,9 @@ function rewardTitle(r: Reward) {
           ? "보유 카드 강화"
           : `유물 · ${economy.relics.find((x) => x.id === r.relic)?.name}`;
 }
-function Scenario({ id, action }: { id: string; action?: React.ReactNode }) {
+function Scenario({ id, action, ruleset }: { id: string; action?: React.ReactNode; ruleset?: Run["ruleset"] }) {
   const scenarioId = id.split("-")[0],
-    s = encounters[scenarioId];
+    s = ruleset === LEGACY_RULES ? legacyPhase0.encounters.find(e => e.id === scenarioId)! : encounters[scenarioId];
   const variant = s.variants.find((v) => v.id === id) ?? s.variants[0];
   return (
     <article className="panel">

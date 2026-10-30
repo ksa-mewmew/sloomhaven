@@ -1880,3 +1880,34 @@ main.deck-page {
 .rules-table-scroll { overflow-x: auto; max-width: 100%; }
 .rules-table-scroll table { width: 100%; border-collapse: collapse; }
 .rules-table-scroll th, .rules-table-scroll td { padding: .6rem; border: 1px solid var(--border, #60758a); text-align: left; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.graph-link { position: absolute; height: 0; border-top: 2px dashed #819aa9; transform-origin: left center; pointer-events: none; }
+.card .face { position: relative; }
+.card .face + .face { border-top: 1px solid #655f50; }
+.card .face > b { min-height: 0; }
+.card .face[role="button"] { cursor: pointer; }
+.card .face[role="button"]:focus-visible { outline: 3px solid #155f91; outline-offset: -3px; }
+.card em, .loss-label { color: #9b1522; font-style: normal; font-weight: 800; }
+.hand-card.expanded > .card { position: relative; width: 100%; max-height: none; transform: none; translate: none; pointer-events: auto; left: auto; right: auto; bottom: auto; }
+.hand-card.expanded:first-child > .card, .hand-card.expanded:last-child > .card { transform: none; translate: none; }
+.hand-card .card-hover-copy { position: absolute; bottom: calc(100% + 12px); left: 50%; translate: -50% 0; width: 280px; z-index: 30; pointer-events: none; }
+.hand-card:first-child .card-hover-copy { left: 0; translate: 0; }
+.hand-card:last-child .card-hover-copy { left: auto; right: 0; translate: 0; }
+.card-hover-copy .card { height: auto; max-height: none; width: 100%; box-shadow: 0 5px 22px #000b; }
+.card-hover-copy .face p { font-size: 1rem; line-height: 1.5; }
+.resource-hud .medkit-button { padding: .25rem .5rem; font-size: .8rem; }
+.plan-summary article { padding: .5rem 0; }
+.enemy-intent-summary { font-size: 1rem; line-height: 1.7; }
+.hand-card.expanded > .card { height: 206px; min-height: 0; padding: 10px; overflow: hidden; }
+.hand-card.expanded > .card header { font-size: 14px; }
+.hand-card.expanded > .card .face p { font-size: 12px; line-height: 1.4; }
+.hand-card.expanded > .card .face > b { font-size: 11px; }
+.airy-center { gap: 12px; min-height: 0; }
+.context-slot { height: 100%; overflow: hidden; }
+.action-composer footer { position: sticky; bottom: -16px; background: var(--sheet); padding: 8px 0; border-top: 1px solid #577082; }
+.action-composer .composer-card-names { display: none; }
+.action-composer .plan-summary h3 { margin: 4px 0; }
+.action-composer .plan-summary p { margin: 6px 0; }
+.card .face { border: 0; }
+.card .face + .face { border-top: 1px solid #655f50; }
+.card header { border-bottom: 0; }

@@ -1,0 +1,1017 @@
+{
+  "status": "duo_data_proposal_only_solo_implementation_can_be_enabled_first",
+  "modeOptions": [
+    "solo",
+    "duo"
+  ],
+  "duoPlayable": false,
+  "encounters": [
+    {
+      "scenarioId": "S01",
+      "name": "1층 복도",
+      "boardId": "grid3x7_v1",
+      "objective": "kill_all",
+      "starts": {
+        "solo": [
+          "r1c1"
+        ],
+        "duo": [
+          "r1c1",
+          "r2c1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "duelist",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "duelist",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "grunt",
+              "node": "r2c5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioId": "S02",
+      "name": "공동 세탁실",
+      "boardId": "grid3x7_v1",
+      "objective": "kill_all",
+      "starts": {
+        "solo": [
+          "r1c1"
+        ],
+        "duo": [
+          "r1c1",
+          "r2c1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "grunt",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c5"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r2c6"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "grunt",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c6"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r2c6"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c5"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "guard",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c6"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r2c6"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioId": "S04",
+      "name": "막힌 현관",
+      "boardId": "grid4x6_v1",
+      "objective": "kill_all",
+      "starts": {
+        "solo": [
+          "r1c1"
+        ],
+        "duo": [
+          "r1c1",
+          "r2c1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r0c5"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioId": "S03",
+      "name": "순환 계단",
+      "boardId": "ring12_v1",
+      "objective": "survive",
+      "starts": {
+        "solo": [
+          "r0"
+        ],
+        "duo": [
+          "r0",
+          "r1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r8"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r8"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r10"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r8"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r8"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r3"
+            }
+          ]
+        }
+      },
+      "turnLimit": 7
+    },
+    {
+      "scenarioId": "S05",
+      "name": "냉장고 속",
+      "boardId": "grid4x6_v1",
+      "objective": "kill_all",
+      "starts": {
+        "solo": [
+          "r1c1"
+        ],
+        "duo": [
+          "r1c1",
+          "r2c1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "grunt",
+              "node": "r2c5"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c5"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r1c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c5"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r3c4"
+            },
+            {
+              "id": "e6",
+              "archetype": "dust",
+              "node": "r3c5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioId": "S06",
+      "name": "고장 난 엘리베이터",
+      "boardId": "fork14_v1",
+      "objective": "kill_target",
+      "starts": {
+        "solo": [
+          "s2"
+        ],
+        "duo": [
+          "s2",
+          "s1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a3"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "b3"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a3"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "b3"
+            },
+            {
+              "id": "e3",
+              "archetype": "marksman",
+              "node": "b2"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a3"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "b2"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "b3"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a3"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "b1"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "b2"
+            },
+            {
+              "id": "e4",
+              "archetype": "grunt",
+              "node": "b3"
+            }
+          ]
+        }
+      },
+      "targetEnemyId": "e1"
+    },
+    {
+      "scenarioId": "S07",
+      "name": "옥상",
+      "boardId": "grid4x6_v1",
+      "objective": "kill_all",
+      "starts": {
+        "solo": [
+          "r1c1"
+        ],
+        "duo": [
+          "r1c1",
+          "r2c1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r3c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r3c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r1c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e6",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r3c5"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "harrier",
+              "node": "r3c5"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e6",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioId": "S08",
+      "name": "404호",
+      "boardId": "ring12_v1",
+      "objective": "survive",
+      "starts": {
+        "solo": [
+          "r0"
+        ],
+        "duo": [
+          "r0",
+          "r1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r8"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r3"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r7"
+            },
+            {
+              "id": "e4",
+              "archetype": "harrier",
+              "node": "r10"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r8"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r10"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r6"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r3"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r8"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r7"
+            },
+            {
+              "id": "e6",
+              "archetype": "dust",
+              "node": "r10"
+            }
+          ]
+        }
+      },
+      "turnLimit": 7
+    },
+    {
+      "scenarioId": "S09",
+      "name": "벽 속 복도",
+      "boardId": "grid4x6_v1",
+      "objective": "kill_all",
+      "starts": {
+        "solo": [
+          "r1c1"
+        ],
+        "duo": [
+          "r1c1",
+          "r2c1"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r1c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r1c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r3c4"
+            }
+          ]
+        },
+        "B": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r0c5"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r0c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "scenarioId": "S10",
+      "name": "관리실",
+      "boardId": "grid5x5_v1",
+      "objective": "kill_target",
+      "starts": {
+        "solo": [
+          "r2c0"
+        ],
+        "duo": [
+          "r2c0",
+          "r3c0"
+        ]
+      },
+      "variants": {
+        "A": {
+          "solo": [
+            {
+              "id": "e1",
+              "archetype": "boss",
+              "node": "r2c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r3c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r4c4"
+            }
+          ],
+          "duo": [
+            {
+              "id": "e1",
+              "archetype": "boss",
+              "node": "r2c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r4c4"
+            },
+            {
+              "id": "e6",
+              "archetype": "harrier",
+              "node": "r2c3"
+            }
+          ]
+        }
+      },
+      "targetEnemyId": "e1"
+    }
+  ]
+}

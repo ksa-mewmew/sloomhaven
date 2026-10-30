@@ -3,6 +3,7 @@ import { cards, content, encounters } from "./data";
 import { createBattle, applyCommand } from "./engine";
 import { random, sample, seedNumber } from "./rng";
 import { replaceRecovery } from "./status";
+import { PHASE1, LEGACY_RULES, rulesDefaults, type Ruleset } from "./rulesets";
 import { economy, economyTrial, ECONOMY_VERSION, relicById, itemById, } from "./economy";
 import type { Command, Side } from "./types";
 export const upgradesAvailable = (r: Pick<Run, "owned" | "upgrades">) => legacy.upgradesAvailable(r as legacy.Run);
@@ -22,6 +23,8 @@ export type Stock = {
     sold: boolean;
 };
 export interface Run extends Omit<legacy.Run, "contentVersion" | "stage" | "rewards"> {
+    ruleset: Ruleset;
+    medkits: number;
     contentVersion: typeof ECONOMY_VERSION;
     stage: legacy.Run["stage"] | "shop";
     rewards: Reward[];
@@ -33,7 +36,7 @@ export interface Run extends Omit<legacy.Run, "contentVersion" | "stage" | "rewa
     rewardType?: "card" | "item" | "relic";
     rewardGold?: number;
 }
-export type RunCommand = legacy.RunCommand | {
+export type RunCommand = legacy.RunCommand | { type: "medkit" } | { type: "retryBattle" } | {
     type: "buy";
     key: string;
 } | {
@@ -57,6 +60,8 @@ export function createRun(seed: string): Run {
     const old = legacy.createRun(seed);
     return {
         ...old,
+        ruleset: rulesDefaults.ruleset,
+        medkits: rulesDefaults.ruleset === PHASE1 ? 1 : 0,
         contentVersion: ECONOMY_VERSION,
         rng: seedNumber(seed),
         rngCount: 0,
@@ -119,7 +124,7 @@ function afterReward(r: Run) {
     if ([3, 7].includes(r.completed.length) &&
         !r.breaksTaken.includes(r.completed.length)) {
         r.stage = "zoneRest";
-        r.rewards = [{ id: "zone-heal", kind: "heal", amount: 8 }];
+        r.rewards = r.ruleset === PHASE1 ? [{ id: "zone-medkit", kind: "continue", amount: 1 }] : [{ id: "zone-heal", kind: "heal", amount: 8 }];
     }
     else if ([5, 9].includes(r.completed.length) &&
         !r.shopsTaken.includes(r.completed.length))
@@ -188,13 +193,20 @@ export function applyRunCommand(state: Run, c: RunCommand): Run {
             openShop(r);
         }
         else if (r.stage === "zoneRest") {
+            if (r.breaksTaken.includes(r.completed.length) || ![3, 7].includes(r.completed.length))
+                throw Error("이미 받은 구역 보급입니다");
             const before = r.hp;
+            if (r.ruleset === PHASE1) {
+                r.medkits++;
+                record(r, "zone_supply", { amount: 1, remaining: r.medkits });
+            } else {
             if (!r.battle || !replaceRecovery(r.battle.player, 8, "heal"))
                 r.hp = Math.min(r.maxHp, r.hp + 8);
             if (r.battle)
                 r.battle.player.hp = r.hp;
+            }
             r.breaksTaken.push(r.completed.length);
-            record(r, "zone_rest", { hpBefore: before, hpAfter: r.hp, amount: 8 });
+            record(r, r.ruleset === PHASE1 ? "zone_supply_confirmed" : "zone_rest", { hpBefore: before, hpAfter: r.hp, amount: r.ruleset === PHASE1 ? 1 : 8 });
             r.rewards = [];
             nextMap(r);
         }
@@ -271,13 +283,28 @@ export function applyRunCommand(state: Run, c: RunCommand): Run {
             r.equipped.length < 8 ||
             r.equipped.length > capacity(r))
             throw Error("8장부터 최대 편성 매수까지 필요합니다");
-        r.battle = createBattle(r.chosen!, `${r.seed}/${r.completed.length + 1}/${r.chosen}`, r.equipped, r.hp, r.maxHp, r.relics, r.upgrades, r.chosenVariant, { items: r.equippedItems });
+        r.battle = createBattle(r.chosen!, `${r.seed}/${r.completed.length + 1}/${r.chosen}`, r.equipped, r.hp, r.maxHp, r.relics, r.upgrades, r.chosenVariant, { items: r.equippedItems, ruleset: r.ruleset, medkits: r.medkits });
         r.initialBattle = structuredClone(r.battle);
         r.stage = "battle";
+    }
+    else if (c.type === "medkit") {
+        if (r.stage !== "battle" || !r.battle || r.ruleset !== PHASE1 || r.battle.medkits !== r.medkits)
+            throw Error("응급약을 사용할 수 없습니다");
+        r.battle = applyCommand(r.battle, { type: "medkit" });
+        r.medkits = r.battle.medkits!;
+        r.hp = r.battle.player.hp;
+        record(r, "medkit_use", { remaining: r.medkits, hp: r.hp });
+    }
+    else if (c.type === "retryBattle") {
+        if (r.stage !== "battle" || !r.initialBattle) throw Error("재시도할 전투가 없습니다");
+        r.battle = structuredClone(r.initialBattle);
+        r.battle.medkits = r.medkits;
+        r.hp = r.battle.player.hp;
     }
     else if (c.type === "battle") {
         if (r.stage !== "battle" || !r.battle)
             throw Error("전투 중 아님");
+        if (c.command.type === "medkit") throw Error("응급약은 런 명령으로 사용하세요");
         r.battle = applyCommand(r.battle, c.command);
     }
     else if (c.type === "report") {
@@ -290,6 +317,10 @@ export function applyRunCommand(state: Run, c: RunCommand): Run {
         if (r.battle.phase === "defeat")
             r.stage = "failure";
         else {
+            if (r.ruleset === PHASE1) {
+                r.hp = r.maxHp;
+                record(r, "victory_recovery", { hp: r.hp, measuredHp: r.battle.player.hp });
+            }
             r.completed.push(r.chosen!);
             if (r.completed.length === 10)
                 r.stage = "success";

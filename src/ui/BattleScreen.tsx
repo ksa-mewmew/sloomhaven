@@ -1,3 +1,4 @@
+import { LEGACY_RULES } from "../game/rulesets";
 import { RulesGuide } from "./RulesGuide";
 import { enemySymbol } from "./enemySymbols";
 import { EconomyControls } from "./EconomyControls";
@@ -7,6 +8,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useId,
   type ReactNode,
   type CSSProperties,
 } from "react";
@@ -22,9 +24,9 @@ import { useBattleMetrics } from "./useBattleMetrics";
 import { archetypes, cards, encounters } from "../game/data";
 import { flavor, enemyFlavor, cardFlavor, logText } from "../game/presentation";
 import { boardOf, living, threats } from "../game/board";
-import { projectEnemyPhase, faceSteps, itemAvailable } from "../game/engine";
+import { projectEnemyPhase, faceSteps, itemAvailable, medkitUnavailable } from "../game/engine";
 import type { Action, Battle, Board, Command, Side } from "../game/types";
-import { compactIntent, describe, intentText, executionInfo } from "./cardText";
+import { compactIntent, describe, intentText, executionInfo, projectedIntentText } from "./cardText";
 export { describe, intentText } from "./cardText";
 export const scenarioName = (id: string) =>
   (
@@ -108,40 +110,38 @@ export function CardView({
   onPick,
   selected,
   upgrade = [],
+  ruleset,
 }: {
   id: string;
   onPick?: (side: Side) => void;
   selected?: string;
   upgrade?: Side[];
+  ruleset?: Battle["ruleset"];
 }) {
   const c = cards[id];
+  const descriptionId = useId();
   return (
     <article className={"card " + (selected ? "selected" : "")} data-card={id}>
       <header>
-        <small>{id}</small> <strong>{c.name}</strong>
+        <strong>{c.name}</strong>
       </header>
       {(["top", "bottom"] as const).map((side) => (
-        <div className="face" key={side}>
+        <div className="face" key={side} role={onPick ? "button" : undefined} tabIndex={onPick ? 0 : undefined} aria-describedby={onPick ? descriptionId + side : undefined} aria-label={c.name + " " + (side === "top" ? "상단" : "하단") + " 선택" + (c[side].loss ? " · 소실" : "")} onClick={onPick ? (e) => { e.stopPropagation(); onPick(side); } : undefined} onKeyDown={onPick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); onPick(side); } } : undefined}>
           <b>
-            {sideName(side)} {upgrade.includes(side) ? "＋ 강화" : ""}{" "}
+            <span className="sr-only">{sideName(side)}</span>{upgrade.includes(side) ? "＋ 강화" : ""}{" "}
             {c[side].loss && <em>소실</em>}
           </b>
-          <p>
+          <p id={descriptionId + side}>
             {faceSteps(
-              { upgrades: { [id]: upgrade } },
+              { upgrades: { [id]: upgrade }, ruleset },
               { card: id, side, basic: false },
             )
               .map(describe)
               .join(" → ")}
           </p>
-          {onPick && (
-            <button onClick={() => onPick(side)}>
-              {side === "top" ? "상단" : "하단"} 배정
-            </button>
-          )}
         </div>
       ))}
-      <p className="card-flavor">{cardFlavor(id)}</p>
+
     </article>
   );
 }
@@ -168,17 +168,24 @@ export function boardProjection(b: Board) {
     [0, 1],
   ];
   const minY = Math.min(...b.nodes.map((n) => n.y ?? 0));
+  const columns = Math.max(1, Math.ceil(b.nodes.length / 4)), rows = Math.max(1, Math.ceil(b.nodes.length / 2) - columns);
+  const perimeter = [
+    ...Array.from({length: columns}, (_,i) => [i,0]),
+    ...Array.from({length: rows}, (_,i) => [columns,i]),
+    ...Array.from({length: columns}, (_,i) => [columns-i,rows]),
+    ...Array.from({length: rows}, (_,i) => [0,rows-i]),
+  ];
   return b.nodes.map((n, i) => ({
     id: n.id,
     x:
       b.kind === "ring"
-        ? ring[i][0]
+        ? (b.nodes.length === 8 ? ring[i][0] : perimeter[i][0])
         : b.kind === "line"
           ? foldedLine[i][0]
           : (n.x ?? 0),
     y:
       b.kind === "ring"
-        ? ring[i][1]
+        ? (b.nodes.length === 8 ? ring[i][1] : perimeter[i][1])
         : b.kind === "line"
           ? foldedLine[i][1]
           : (n.y ?? 0) - minY,
@@ -234,7 +241,7 @@ export function BoardView({
       style={
         {
           "--board-step":
-            maxX > 5 ? "clamp(46px, 4vw, 72px)" : "clamp(46px, 7vh, 78px)",
+            maxY >= 4 ? "clamp(46px, 5.5vh, 62px)" : maxX > 5 ? "clamp(46px, 4vw, 66px)" : "clamp(46px, 6vh, 68px)",
           "--node-size": "clamp(38px, 5.6vh, 60px)",
           width: `calc(${maxX} * var(--board-step) + var(--node-size))`,
           height: `calc(${maxY} * var(--board-step) + var(--node-size))`,
@@ -242,50 +249,9 @@ export function BoardView({
       }
     >
       {b.edges.map(([a, c]) => {
-        let f = coords.find((n) => n.id === a)!,
-          t = coords.find((n) => n.id === c)!;
-        const x = f.x,
-          y = f.y,
-          xx = t.x,
-          yy = t.y;
-        return (
-          <span key={a + c} data-edge={`${a}:${c}`} aria-hidden="true">
-            <span
-              className="text-edge"
-              style={{
-                left: at(Math.min(x, xx)),
-                top: `calc(${at(y)} - 9px)`,
-                width: `calc(${Math.abs(xx - x)} * var(--board-step))`,
-                height: 18,
-              }}
-            >
-              {"-".repeat(16)}
-            </span>
-            {y !== yy && (
-              <span
-                className="text-edge vertical"
-                style={{
-                  left: `calc(${at(xx)} - 5px)`,
-                  top: at(Math.min(y, yy)),
-                  height: `calc(${Math.abs(yy - y)} * var(--board-step))`,
-                }}
-              >
-                {"|\n".repeat(16)}
-              </span>
-            )}
-            {x !== xx && y !== yy && (
-              <span
-                className="text-edge"
-                style={{
-                  left: `calc(${at(xx)} - 5px)`,
-                  top: `calc(${at(y)} - 9px)`,
-                }}
-              >
-                +
-              </span>
-            )}
-          </span>
-        );
+        const f = coords.find(n => n.id === a)!, t = coords.find(n => n.id === c)!;
+        const dx = t.x - f.x, dy = t.y - f.y;
+        return <span key={a + c} data-edge={a + ":" + c} className="graph-link" aria-hidden="true" style={{ left: at(f.x), top: at(f.y), width: "calc(" + Math.hypot(dx, dy) + " * var(--board-step))", transform: "rotate(" + Math.atan2(dy, dx) + "rad)" }} />;
       })}
       {coords.map((n) => {
         const e = s.enemies.find((e) => e.hp > 0 && e.node === n.id),
@@ -339,6 +305,7 @@ export function BattleScreen({
   onResult,
   progress,
   gold,
+  onMedkit,
 }: {
   battle: Battle;
   dispatch: (c: Command) => void;
@@ -347,6 +314,7 @@ export function BattleScreen({
   onResult: (metrics: { seconds: number; inputs: number }) => void;
   progress?: string;
   gold?: number;
+  onMedkit?: () => void;
 }) {
   const [selected, setSelected] = useState<string[]>([]),
     [top, setTop] = useState<Action>(),
@@ -444,56 +412,28 @@ export function BattleScreen({
     setLoss([]);
     if (c.type === "play" || c.type === "rest") clearSelection();
   };
-  function toggleCard(id: string) {
+  function toggleCard(id: string, side?: Side) {
     if (!ready) return;
-    const next = selected.includes(id)
-      ? selected.filter((x) => x !== id)
-      : selected.length < 2
-        ? [...selected, id]
-        : [selected[0], id];
-    setSelected(next);
-    if (top && !next.includes(top.card)) setTop(undefined);
-    if (bottom && !next.includes(bottom.card)) setBottom(undefined);
-  }
-  function assign(id: string, side: Side, basic: boolean) {
-    if (!ready || selected.length !== 2 || !selected.includes(id)) return;
-    const action = { card: id, side, basic };
-    if (side === "top") {
-      setTop(action);
-      if (bottom?.card === id) setBottom(undefined);
-    } else {
-      setBottom(action);
+    const existing = top?.card === id ? top : bottom?.card === id ? bottom : undefined;
+    if (selected.includes(id) && (!side || existing?.side === side)) {
+      setSelected(selected.filter(x => x !== id));
       if (top?.card === id) setTop(undefined);
+      if (bottom?.card === id) setBottom(undefined);
+      return;
     }
+    if (!selected.length || (selected.length === 1 && selected[0] === id)) {
+      const chosen = side ?? "top";
+      setSelected([id]); setTop(chosen === "top" ? {card:id, side:"top", basic:false} : undefined);
+      setBottom(chosen === "bottom" ? {card:id, side:"bottom", basic:false} : undefined); setReverse(false); return;
+    }
+    const anchor = selected.includes(id) ? selected.find(x => x !== id)! : selected[0];
+    const anchorAction = top?.card === anchor ? top : bottom?.card === anchor ? bottom : undefined;
+    const chosen = side ?? (anchorAction?.side === "top" ? "bottom" : "top");
+    const other: Side = chosen === "top" ? "bottom" : "top";
+    const first = {card:anchor, side:other, basic:anchorAction?.side === other ? anchorAction.basic : false};
+    const second = {card:id, side:chosen, basic:false};
+    setSelected([anchor,id]);setTop(chosen === "top" ? second : first);setBottom(chosen === "bottom" ? second : first);
   }
-  const chooseButtons = (id: string) => (
-    <div className="four-choices">
-      {(["top", "bottom"] as Side[]).flatMap((side) =>
-        [false, true].map((basic) => (
-          <button
-            key={side + basic}
-            data-choice={id + ":" + side + ":" + (basic ? "basic" : "printed")}
-            disabled={!ready || selected.length !== 2 || !selected.includes(id)}
-            aria-pressed={
-              (side === "top" ? top : bottom)?.card === id &&
-              (side === "top" ? top : bottom)?.basic === basic
-            }
-            title={faceSteps(s, { card: id, side, basic })
-              .map(describe)
-              .join(" → ")}
-            onClick={() => assign(id, side, basic)}
-          >
-            {sideName(side)}{" "}
-            {basic
-              ? side === "top"
-                ? "기본 공격 3"
-                : "기본 이동 1"
-              : "인쇄 효과"}
-          </button>
-        )),
-      )}
-    </div>
-  );
   const available =
     p?.kind === "effect"
       ? p.paths
@@ -621,6 +561,7 @@ export function BattleScreen({
       <header className="airy-header">
         <div>
           <small>
+            {s.ruleset === LEGACY_RULES ? "이전 규칙 · " : ""}
             {flavor.story.title} / {progress ?? "전투 연습"} / {s.variant}
           </small>
           <h1>
@@ -658,65 +599,17 @@ export function BattleScreen({
                   </h2>
                   <button onClick={clearSelection}>선택 초기화</button>
                 </header>
-                <div className="composer-choices">
-                  {selected.map((id) => (
-                    <article key={id}>
-                      <h3>
-                        {id} {cards[id].name}
-                      </h3>
-                      <p className="choice-effects">
-                        ▲{" "}
-                        {faceSteps(s, { card: id, side: "top", basic: false })
-                          .map(describe)
-                          .join(" → ")}
-                        {cards[id].top.loss ? " · 소실" : ""}
-                        <br />▼{" "}
-                        {faceSteps(s, {
-                          card: id,
-                          side: "bottom",
-                          basic: false,
-                        })
-                          .map(describe)
-                          .join(" → ")}
-                        {cards[id].bottom.loss ? " · 소실" : ""}
-                      </p>
-                      {chooseButtons(id)}
-                    </article>
-                  ))}
-                </div>
                 <div className="plan-summary">
-                  {(reverse ? ["bottom", "top"] : ["top", "bottom"]).map(
-                    (side) => {
-                      const action = side === "top" ? top : bottom;
-                      return (
-                        <p key={side}>
-                          <b>
-                            {sideName(side as Side)}{" "}
-                            {action ? cards[action.card].name : "배정 대기"}
-                          </b>
-                          {action && (
-                            <span>
-                              {faceSteps(s, action).map(describe).join(" → ")} ·{" "}
-                              {!action.basic &&
-                              cards[action.card][action.side].loss
-                                ? "소실"
-                                : "버림"}
-                            </span>
-                          )}
-                        </p>
-                      );
-                    },
-                  )}
+                  {(reverse ? [bottom,top] : [top,bottom]).map(action => action && <article key={action.side}>
+                    <h3>{cards[action.card].name} · {sideName(action.side)}</h3>
+                    <p>{faceSteps(s,action).map(describe).join(" → ")}{!action.basic && cards[action.card][action.side].loss && <em className="loss-label"> 소실</em>}</p>
+                    <button data-basic-for={action.side} aria-pressed={!!action.basic} aria-label={cards[action.card].name + " " + sideName(action.side) + " 기본 행동"} onClick={() => {const next={...action,basic:!action.basic}; if(action.side === "top")setTop(next);else setBottom(next);}}>기본 행동 {action.basic ? "사용 중" : "대신 사용"}</button>
+                  </article>)}
                 </div>
                 <footer>
                   <button onClick={() => setReverse(!reverse)}>
                     순서 변경 · {reverse ? "하단 → 상단" : "상단 → 하단"}
                   </button>
-                  <p className="plan-reason" role="status">
-                    {!top || !bottom
-                      ? "서로 다른 카드의 상단 1개와 하단 1개를 배정하세요."
-                      : "두 행동을 실행할 수 있습니다."}
-                  </p>
                   <button
                     className="primary"
                     disabled={
@@ -772,6 +665,7 @@ export function BattleScreen({
               {s.retain ? " · 보존" : ""}
             </span>
             <span title={statusText(s.player)}>{statusText(s.player)}</span>
+            <button className="medkit-button" disabled={!onMedkit || !!medkitUnavailable(s)} onClick={onMedkit} aria-label={"응급약 ×" + (s.medkits ?? 0) + " · " + (!onMedkit ? "런에서만 사용합니다" : medkitUnavailable(s) || "HP 6 회복")} title={!onMedkit ? "런에서만 사용합니다" : medkitUnavailable(s) || "HP 6 회복"}>응급약 ×{s.medkits ?? 0}</button>
             <strong data-gold>
               {gold === undefined ? "골드 — (연습)" : "G " + gold}
             </strong>
@@ -786,7 +680,7 @@ export function BattleScreen({
             >
               <header>
                 <h2>
-                  [{enemySymbol(enemy.archetype)}] {skin?.name ?? a.name} · {enemy.id}
+                  [{enemySymbol(enemy.archetype)}] {skin?.name ?? a.name}
                 </h2>
                 <button
                   aria-label="적 상세 닫기"
@@ -798,65 +692,10 @@ export function BattleScreen({
                   닫기
                 </button>
               </header>
-              <p>
-                {pinnedEnemy ? "고정됨" : "현재 가리킨 적"} · HP{" "}
-                {Math.max(0, enemy.hp)}/{enemy.maxHp} · 방어 {enemy.block}
-              </p>
-              <p>{statusText(enemy)}</p>
-              <h3>행동 순서 · 패턴 확정</h3>
-              <p>
-                {enemy.intent &&
-                  intentText(enemy.intent, enemy.buff, enemy.weak)}
-              </p>
-              <p className="preview-contract">
-                현재 전장 기준 단독 예상입니다. 경로는 실제 이동 단계 시작에
-                결정됩니다.
-              </p>
-              <ol className="intent-steps">
-                {forecast.steps.map((x) => (
-                  <li key={x.index} data-intent-step={x.index}>
-                    {intentText(x.step, enemy.buff, enemy.weak)}
-                    <br />
-                    {x.step.kind === "move"
-                      ? x.start +
-                        " → " +
-                        (x.path.join(" → ") || "제자리") +
-                        (x.reason === "bind_consumed" ? " · 속박 생략" : "")
-                      : ["attack", "marked", "adjacent_all"].includes(
-                            x.step.kind,
-                          )
-                        ? x.hits.length
-                          ? "현재 공격 가능"
-                          : "현재 사거리 밖/고정 칸 이탈 또는 무장해제"
-                        : "독립 효과"}
-                  </li>
-                ))}
-              </ol>
-              <p>
-                지정 칸:{" "}
-                {enemy.marks?.filter(Boolean).join(", ") ||
-                  enemy.mark ||
-                  "없음"}
-              </p>
-              <p>예상 위협: {forecast.threats.join(", ") || "없음"}</p>
-              <p>
-                {attackPreview(s, enemy)
-                  .map((x) =>
-                    x.hits
-                      .map(
-                        (h) =>
-                          "공격 " +
-                          h.damage +
-                          " / 방어 " +
-                          h.blocked +
-                          " / HP −" +
-                          h.hp,
-                      )
-                      .join(" → "),
-                  )
-                  .join(" / ") || "현재 위치 피격 없음"}
-              </p>
-              <button onClick={() => setView("enemy")}>전체 행동 후보</button>
+              <p>HP {Math.max(0,enemy.hp)}/{enemy.maxHp}{enemy.block > 0 ? " · 방어 " + enemy.block : ""}</p>
+              {statusText(enemy) !== "상태이상 없음" && <p>{statusText(enemy)}</p>}
+              <p className="enemy-intent-summary">{enemy.intent && projectedIntentText(forecast.steps,enemy.buff,enemy.weak)}</p>
+              <button onClick={() => setView("enemy")}>상세 보기</button>
             </section>
           )}
         </aside>
@@ -891,13 +730,10 @@ export function BattleScreen({
                 ((hover || focusCard) === id ? "expanded" : "")
               }
               data-hand={id}
-              role="button"
+              role="group"
               tabIndex={ready ? 0 : -1}
               aria-disabled={!ready}
-              aria-pressed={selected.includes(id)}
               aria-label={
-                id +
-                " " +
                 cards[id].name +
                 (selected.includes(id) ? " 선택됨" : " 선택")
               }
@@ -924,7 +760,8 @@ export function BattleScreen({
                 } as CSSProperties
               }
             >
-              <CardView id={id} upgrade={s.upgrades[id]} />
+              <CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} onPick={ready ? side => toggleCard(id,side) : undefined} />
+              {(hover || focusCard) === id && <div className="card-hover-copy" aria-hidden="true"><CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} /></div>}
               <span className="hand-selection">
                 {selected.includes(id)
                   ? "✓ 선택 " + (selected.indexOf(id) + 1)
@@ -973,11 +810,11 @@ export function BattleScreen({
           <div className="full-card-grid">
             {s.zones.hand.map((id) => (
               <div key={id}>
-                <CardView id={id} upgrade={s.upgrades[id]} />
+                <CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} onPick={side => toggleCard(id,side)} />
                 <button onClick={() => toggleCard(id)} disabled={!ready}>
                   {selected.includes(id) ? "✓ 선택 해제" : "이 카드 선택"}
                 </button>
-                {chooseButtons(id)}
+
               </div>
             ))}
           </div>
@@ -985,7 +822,7 @@ export function BattleScreen({
       )}
       {view === "help" && (
         <Modal title="규칙 안내" close={() => setView(null)}>
-          <RulesGuide />
+          <RulesGuide legacy={s.ruleset === LEGACY_RULES} />
         </Modal>
       )}
       {view === "zones" && (

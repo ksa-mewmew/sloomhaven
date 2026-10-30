@@ -2,6 +2,7 @@ import type { Run } from "./campaign";
 import type { Battle } from "./types";
 export const SCENARIO_ID_SCHEME = "sequential-s09-stage9-s10-boss-v1";
 export const SCENARIO_SAVE_BACKUP_KEY = "askew-apartment/archive/v3.2-before-sequential-ids";
+export const FOUNDATION_BACKUP_KEY = "askew-apartment/archive/v3.2-before-phase1-foundation";
 const mapping: Record<string, string> = {
   S09: "S10", S10: "S09", "S09-A": "S10-A", "S10-A": "S09-A", "S10-B": "S09-B",
 };
@@ -25,7 +26,10 @@ export function preserveScenarioSave(store: Store, key: string) {
   const text = store.getItem(key);
   if (!text) return;
   let scheme: unknown;
-  try { scheme = JSON.parse(text).scenarioIdScheme; } catch { scheme = undefined; }
+  let foundation: unknown;
+  try { const d = JSON.parse(text); scheme = d.scenarioIdScheme; foundation = d.foundationVersion; } catch { scheme = undefined; }
+  if (foundation !== 1 && store.getItem(FOUNDATION_BACKUP_KEY) === null)
+    store.setItem(FOUNDATION_BACKUP_KEY, text);
   if (scheme !== SCENARIO_ID_SCHEME && store.getItem(SCENARIO_SAVE_BACKUP_KEY) === null)
     store.setItem(SCENARIO_SAVE_BACKUP_KEY, text);
 }

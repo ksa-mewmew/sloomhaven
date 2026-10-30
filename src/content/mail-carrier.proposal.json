@@ -1,0 +1,455 @@
+{
+  "id": "mail_carrier",
+  "name": "우편배달부",
+  "role": "원거리·기동·노출·약화 / 솔로 자립 가능",
+  "initialHp": 20,
+  "maxHp": 20,
+  "deckCapacity": 8,
+  "starterCardIds": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08"
+  ],
+  "cards": [
+    {
+      "id": "D01",
+      "name": "첫 배달",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "text": "공격 3 · 사거리 3",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 3
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D02",
+      "name": "주소 확인",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "text": "공격 2 · 사거리 2 → 노출 1",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 2
+          },
+          {
+            "type": "status",
+            "status": "exposed",
+            "stacks": 1,
+            "target": "last_attack_target",
+            "range": "any"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D03",
+      "name": "등기 우편",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "text": "공격 4 · 사거리 2",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 4,
+            "range": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "방어 4",
+        "steps": [
+          {
+            "type": "block",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "D04",
+      "name": "반송 처리",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "text": "공격 3 · 사거리 2 → 적중 대상 밀치기 1",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 2
+          },
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "last_attack_target",
+            "range": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 1 → 약화 1 · 사거리 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "status",
+            "status": "weak",
+            "stacks": 1,
+            "target": "one_enemy",
+            "range": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D05",
+      "name": "지름길",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "text": "이동 2 → 공격 2 · 사거리 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          },
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 3",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "D06",
+      "name": "종이 폭풍",
+      "pool": "start",
+      "top": {
+        "loss": true,
+        "text": "거리 2 이내 모든 적 공격 2",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 2,
+            "target": "all_enemies"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D07",
+      "name": "우편함 뒤",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "text": "방어 5",
+        "steps": [
+          {
+            "type": "block",
+            "amount": 5
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 1 → 방어 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "block",
+            "amount": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D08",
+      "name": "마감 시각",
+      "pool": "start",
+      "top": {
+        "loss": true,
+        "text": "공격 7 · 사거리 3",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 7,
+            "range": 3
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2 → 공격 2 · 사거리 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          },
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D09",
+      "name": "연속 배송",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "text": "공격 3 · 사거리 3 → 공격 3 · 사거리 3",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 3
+          },
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 3
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2 → 노출 1 · 사거리 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          },
+          {
+            "type": "status",
+            "status": "exposed",
+            "stacks": 1,
+            "target": "one_enemy",
+            "range": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "D10",
+      "name": "반품 접수",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "text": "중독 2 · 사거리 3",
+        "steps": [
+          {
+            "type": "status",
+            "status": "poison",
+            "stacks": 2,
+            "target": "one_enemy",
+            "range": 3
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2 → 밀치기 1",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          },
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "one_enemy",
+            "range": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "D11",
+      "name": "직배송",
+      "pool": "reward",
+      "top": {
+        "loss": true,
+        "text": "이동 3 → 공격 4 · 사거리 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 3
+          },
+          {
+            "type": "attack",
+            "damage": 4,
+            "range": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 3",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "D12",
+      "name": "송장 정리",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "text": "공격 3 · 사거리 3 · 비공격 의도 상대에게 +3",
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 3,
+            "bonus_damage": 3,
+            "condition": "target_original_intent_nonattack"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "약화 2 · 사거리 3",
+        "steps": [
+          {
+            "type": "status",
+            "status": "weak",
+            "stacks": 2,
+            "target": "one_enemy",
+            "range": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "D13",
+      "name": "창문 너머",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "text": "밀치기 2 · 사거리 2",
+        "steps": [
+          {
+            "type": "push",
+            "distance": 2,
+            "target": "one_enemy",
+            "range": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": true,
+        "text": "이동 4",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "D14",
+      "name": "등기 보관",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "text": "방어 4 → 회복 2",
+        "steps": [
+          {
+            "type": "block",
+            "amount": 4
+          },
+          {
+            "type": "heal",
+            "amount": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "text": "이동 2 → 방어 2",
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          },
+          {
+            "type": "block",
+            "amount": 2
+          }
+        ]
+      }
+    }
+  ],
+  "status": "design_proposal_not_implemented"
+}

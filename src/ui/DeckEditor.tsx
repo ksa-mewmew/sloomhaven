@@ -1,11 +1,13 @@
+import type { Ruleset } from "../game/rulesets";
 import { useEffect, useState } from "react";
 import { cards, content } from "../game/data";
 import type { Side } from "../game/types";
 import { CardView, Modal } from "./BattleScreen";
-export function CardComparison({ owned, equipped, upgrades = {}, }: {
+export function CardComparison({ owned, equipped, upgrades = {}, ruleset, }: {
     owned: string[];
     equipped: string[];
     upgrades?: Record<string, Side[]>;
+    ruleset?: Ruleset;
 }) {
     const [open, setOpen] = useState(false);
     return (<>
@@ -14,18 +16,19 @@ export function CardComparison({ owned, equipped, upgrades = {}, }: {
           <div className="full-card-grid">
             {owned.map((id) => (<div key={id}>
                 <p>{equipped.includes(id) ? "✓ 출전" : "보유 · 예비"}</p>
-                <CardView id={id} upgrade={upgrades[id]}/>
+                <CardView id={id} upgrade={upgrades[id]} ruleset={ruleset}/>
               </div>))}
           </div>
         </Modal>)}
     </>);
 }
-export function DeckEditor({ owned, equipped, capacity, minimum = capacity, upgrades = {}, onSave, onStart, }: {
+export function DeckEditor({ owned, equipped, capacity, minimum = capacity, upgrades = {}, onSave, onStart, ruleset, }: {
     owned: string[];
     equipped: string[];
     capacity: number;
     minimum?: number;
     upgrades?: Record<string, Side[]>;
+    ruleset?: Ruleset;
     onSave: (ids: string[]) => void;
     onStart?: () => void;
 }) {
@@ -124,18 +127,19 @@ export function DeckEditor({ owned, equipped, capacity, minimum = capacity, upgr
           </ol>
         </section>
         <section className="deck-preview" aria-label="카드 상세">
-          {inspect && <CardView id={inspect} upgrade={upgrades[inspect]}/>}
-          <CardComparison owned={owned} equipped={draft} upgrades={upgrades}/>
+          {inspect && <CardView id={inspect} upgrade={upgrades[inspect]} ruleset={ruleset}/>}
+          <CardComparison owned={owned} equipped={draft} upgrades={upgrades} ruleset={ruleset}/>
         </section>
       </div>
     </section>);
 }
-export function UpgradePicker({ options, upgrades, onChoose, }: {
+export function UpgradePicker({ options, upgrades, onChoose, ruleset, }: {
     options: {
         id: string;
         side: Side;
     }[];
     upgrades: Record<string, Side[]>;
+    ruleset?: Ruleset;
     onChoose: (id: string, side: Side) => void;
 }) {
     const [pick, setPick] = useState<{
@@ -153,13 +157,13 @@ export function UpgradePicker({ options, upgrades, onChoose, }: {
           <div className="upgrade-comparison">
             <section>
               <h3>현재 능력</h3>
-              <CardView id={pick.id} upgrade={upgrades[pick.id]}/>
+              <CardView id={pick.id} upgrade={upgrades[pick.id]} ruleset={ruleset}/>
             </section>
             <section>
               <h3>
                 강화 후 · {pick.side === "top" ? "첫 공격 +1" : "첫 방어도 +1"}
               </h3>
-              <CardView id={pick.id} upgrade={[...(upgrades[pick.id] ?? []), pick.side]}/>
+              <CardView id={pick.id} upgrade={[...(upgrades[pick.id] ?? []), pick.side]} ruleset={ruleset}/>
             </section>
           </div>
           <button className="primary" onClick={() => onChoose(pick.id, pick.side)}>

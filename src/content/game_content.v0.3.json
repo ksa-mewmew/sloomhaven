@@ -4,7 +4,7 @@
   "character": {
     "id": "wanderer",
     "name": "방문자",
-    "maxHp": 40,
+    "maxHp": 20,
     "deckCapacity": 8,
     "initialOwnedCards": [
       "C01",
@@ -551,7 +551,7 @@
         "steps": [
           {
             "type": "self_hp_loss",
-            "amount": 2
+            "amount": 3
           },
           {
             "type": "attack",
@@ -565,7 +565,7 @@
         "steps": [
           {
             "type": "self_hp_loss",
-            "amount": 2
+            "amount": 3
           },
           {
             "type": "move",
@@ -1426,6 +1426,1082 @@
           "b2"
         ]
       ]
+    },
+    {
+      "id": "grid3x7_v1",
+      "kind": "grid",
+      "nodes": [
+        {
+          "id": "r0c0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "r0c1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "r0c2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "r0c3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "r0c4",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "r0c5",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "r0c6",
+          "x": 6,
+          "y": 0
+        },
+        {
+          "id": "r1c0",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "id": "r1c1",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "r1c2",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "id": "r1c3",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "id": "r1c4",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "r1c5",
+          "x": 5,
+          "y": 1
+        },
+        {
+          "id": "r1c6",
+          "x": 6,
+          "y": 1
+        },
+        {
+          "id": "r2c0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "r2c1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "r2c2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "r2c3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "r2c4",
+          "x": 4,
+          "y": 2
+        },
+        {
+          "id": "r2c5",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "id": "r2c6",
+          "x": 6,
+          "y": 2
+        }
+      ],
+      "edges": [
+        [
+          "r0c0",
+          "r0c1"
+        ],
+        [
+          "r0c0",
+          "r1c0"
+        ],
+        [
+          "r0c1",
+          "r0c2"
+        ],
+        [
+          "r0c1",
+          "r1c1"
+        ],
+        [
+          "r0c2",
+          "r0c3"
+        ],
+        [
+          "r0c2",
+          "r1c2"
+        ],
+        [
+          "r0c3",
+          "r0c4"
+        ],
+        [
+          "r0c3",
+          "r1c3"
+        ],
+        [
+          "r0c4",
+          "r0c5"
+        ],
+        [
+          "r0c4",
+          "r1c4"
+        ],
+        [
+          "r0c5",
+          "r0c6"
+        ],
+        [
+          "r0c5",
+          "r1c5"
+        ],
+        [
+          "r0c6",
+          "r1c6"
+        ],
+        [
+          "r1c0",
+          "r1c1"
+        ],
+        [
+          "r1c0",
+          "r2c0"
+        ],
+        [
+          "r1c1",
+          "r1c2"
+        ],
+        [
+          "r1c1",
+          "r2c1"
+        ],
+        [
+          "r1c2",
+          "r1c3"
+        ],
+        [
+          "r1c2",
+          "r2c2"
+        ],
+        [
+          "r1c3",
+          "r1c4"
+        ],
+        [
+          "r1c3",
+          "r2c3"
+        ],
+        [
+          "r1c4",
+          "r1c5"
+        ],
+        [
+          "r1c4",
+          "r2c4"
+        ],
+        [
+          "r1c5",
+          "r1c6"
+        ],
+        [
+          "r1c5",
+          "r2c5"
+        ],
+        [
+          "r1c6",
+          "r2c6"
+        ],
+        [
+          "r2c0",
+          "r2c1"
+        ],
+        [
+          "r2c1",
+          "r2c2"
+        ],
+        [
+          "r2c2",
+          "r2c3"
+        ],
+        [
+          "r2c3",
+          "r2c4"
+        ],
+        [
+          "r2c4",
+          "r2c5"
+        ],
+        [
+          "r2c5",
+          "r2c6"
+        ]
+      ]
+    },
+    {
+      "id": "grid4x6_v1",
+      "kind": "grid",
+      "nodes": [
+        {
+          "id": "r0c0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "r0c1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "r0c2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "r0c3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "r0c4",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "r0c5",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "r1c0",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "id": "r1c1",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "r1c2",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "id": "r1c3",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "id": "r1c4",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "r1c5",
+          "x": 5,
+          "y": 1
+        },
+        {
+          "id": "r2c0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "r2c1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "r2c2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "r2c3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "r2c4",
+          "x": 4,
+          "y": 2
+        },
+        {
+          "id": "r2c5",
+          "x": 5,
+          "y": 2
+        },
+        {
+          "id": "r3c0",
+          "x": 0,
+          "y": 3
+        },
+        {
+          "id": "r3c1",
+          "x": 1,
+          "y": 3
+        },
+        {
+          "id": "r3c2",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "id": "r3c3",
+          "x": 3,
+          "y": 3
+        },
+        {
+          "id": "r3c4",
+          "x": 4,
+          "y": 3
+        },
+        {
+          "id": "r3c5",
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "edges": [
+        [
+          "r0c0",
+          "r0c1"
+        ],
+        [
+          "r0c0",
+          "r1c0"
+        ],
+        [
+          "r0c1",
+          "r0c2"
+        ],
+        [
+          "r0c1",
+          "r1c1"
+        ],
+        [
+          "r0c2",
+          "r0c3"
+        ],
+        [
+          "r0c2",
+          "r1c2"
+        ],
+        [
+          "r0c3",
+          "r0c4"
+        ],
+        [
+          "r0c3",
+          "r1c3"
+        ],
+        [
+          "r0c4",
+          "r0c5"
+        ],
+        [
+          "r0c4",
+          "r1c4"
+        ],
+        [
+          "r0c5",
+          "r1c5"
+        ],
+        [
+          "r1c0",
+          "r1c1"
+        ],
+        [
+          "r1c0",
+          "r2c0"
+        ],
+        [
+          "r1c1",
+          "r1c2"
+        ],
+        [
+          "r1c1",
+          "r2c1"
+        ],
+        [
+          "r1c2",
+          "r1c3"
+        ],
+        [
+          "r1c2",
+          "r2c2"
+        ],
+        [
+          "r1c3",
+          "r1c4"
+        ],
+        [
+          "r1c3",
+          "r2c3"
+        ],
+        [
+          "r1c4",
+          "r1c5"
+        ],
+        [
+          "r1c4",
+          "r2c4"
+        ],
+        [
+          "r1c5",
+          "r2c5"
+        ],
+        [
+          "r2c0",
+          "r2c1"
+        ],
+        [
+          "r2c0",
+          "r3c0"
+        ],
+        [
+          "r2c1",
+          "r2c2"
+        ],
+        [
+          "r2c1",
+          "r3c1"
+        ],
+        [
+          "r2c2",
+          "r2c3"
+        ],
+        [
+          "r2c2",
+          "r3c2"
+        ],
+        [
+          "r2c3",
+          "r2c4"
+        ],
+        [
+          "r2c3",
+          "r3c3"
+        ],
+        [
+          "r2c4",
+          "r2c5"
+        ],
+        [
+          "r2c4",
+          "r3c4"
+        ],
+        [
+          "r2c5",
+          "r3c5"
+        ],
+        [
+          "r3c0",
+          "r3c1"
+        ],
+        [
+          "r3c1",
+          "r3c2"
+        ],
+        [
+          "r3c2",
+          "r3c3"
+        ],
+        [
+          "r3c3",
+          "r3c4"
+        ],
+        [
+          "r3c4",
+          "r3c5"
+        ]
+      ]
+    },
+    {
+      "id": "ring12_v1",
+      "kind": "ring",
+      "nodes": [
+        {
+          "id": "r0",
+          "index": 0,
+          "x": 5,
+          "y": 0.5
+        },
+        {
+          "id": "r1",
+          "index": 1,
+          "x": 7.25,
+          "y": 1.1029
+        },
+        {
+          "id": "r2",
+          "index": 2,
+          "x": 8.8971,
+          "y": 2.75
+        },
+        {
+          "id": "r3",
+          "index": 3,
+          "x": 9.5,
+          "y": 5
+        },
+        {
+          "id": "r4",
+          "index": 4,
+          "x": 8.8971,
+          "y": 7.25
+        },
+        {
+          "id": "r5",
+          "index": 5,
+          "x": 7.25,
+          "y": 8.8971
+        },
+        {
+          "id": "r6",
+          "index": 6,
+          "x": 5,
+          "y": 9.5
+        },
+        {
+          "id": "r7",
+          "index": 7,
+          "x": 2.75,
+          "y": 8.8971
+        },
+        {
+          "id": "r8",
+          "index": 8,
+          "x": 1.1029,
+          "y": 7.25
+        },
+        {
+          "id": "r9",
+          "index": 9,
+          "x": 0.5,
+          "y": 5
+        },
+        {
+          "id": "r10",
+          "index": 10,
+          "x": 1.1029,
+          "y": 2.75
+        },
+        {
+          "id": "r11",
+          "index": 11,
+          "x": 2.75,
+          "y": 1.1029
+        }
+      ],
+      "edges": [
+        [
+          "r0",
+          "r1"
+        ],
+        [
+          "r1",
+          "r2"
+        ],
+        [
+          "r2",
+          "r3"
+        ],
+        [
+          "r3",
+          "r4"
+        ],
+        [
+          "r4",
+          "r5"
+        ],
+        [
+          "r5",
+          "r6"
+        ],
+        [
+          "r6",
+          "r7"
+        ],
+        [
+          "r7",
+          "r8"
+        ],
+        [
+          "r8",
+          "r9"
+        ],
+        [
+          "r9",
+          "r10"
+        ],
+        [
+          "r10",
+          "r11"
+        ],
+        [
+          "r11",
+          "r0"
+        ]
+      ]
+    },
+    {
+      "id": "fork14_v1",
+      "kind": "graph",
+      "nodes": [
+        {
+          "id": "s0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "s1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "s2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "s3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "a0",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "a1",
+          "x": 5,
+          "y": 1
+        },
+        {
+          "id": "a2",
+          "x": 6,
+          "y": 1
+        },
+        {
+          "id": "a3",
+          "x": 7,
+          "y": 1
+        },
+        {
+          "id": "a4",
+          "x": 8,
+          "y": 1
+        },
+        {
+          "id": "b0",
+          "x": 4,
+          "y": 3
+        },
+        {
+          "id": "b1",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "id": "b2",
+          "x": 6,
+          "y": 3
+        },
+        {
+          "id": "b3",
+          "x": 7,
+          "y": 3
+        },
+        {
+          "id": "b4",
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "edges": [
+        [
+          "s0",
+          "s1"
+        ],
+        [
+          "s1",
+          "s2"
+        ],
+        [
+          "s2",
+          "s3"
+        ],
+        [
+          "s3",
+          "a0"
+        ],
+        [
+          "s3",
+          "b0"
+        ],
+        [
+          "a0",
+          "a1"
+        ],
+        [
+          "a1",
+          "a2"
+        ],
+        [
+          "a2",
+          "a3"
+        ],
+        [
+          "a3",
+          "a4"
+        ],
+        [
+          "b0",
+          "b1"
+        ],
+        [
+          "b1",
+          "b2"
+        ],
+        [
+          "b2",
+          "b3"
+        ],
+        [
+          "b3",
+          "b4"
+        ],
+        [
+          "a4",
+          "b4"
+        ]
+      ]
+    },
+    {
+      "id": "grid5x5_v1",
+      "kind": "grid",
+      "nodes": [
+        {
+          "id": "r0c0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "r0c1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "r0c2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "r0c3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "r0c4",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "r1c0",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "id": "r1c1",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "r1c2",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "id": "r1c3",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "id": "r1c4",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "r2c0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "r2c1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "r2c2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "r2c3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "r2c4",
+          "x": 4,
+          "y": 2
+        },
+        {
+          "id": "r3c0",
+          "x": 0,
+          "y": 3
+        },
+        {
+          "id": "r3c1",
+          "x": 1,
+          "y": 3
+        },
+        {
+          "id": "r3c2",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "id": "r3c3",
+          "x": 3,
+          "y": 3
+        },
+        {
+          "id": "r3c4",
+          "x": 4,
+          "y": 3
+        },
+        {
+          "id": "r4c0",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "id": "r4c1",
+          "x": 1,
+          "y": 4
+        },
+        {
+          "id": "r4c2",
+          "x": 2,
+          "y": 4
+        },
+        {
+          "id": "r4c3",
+          "x": 3,
+          "y": 4
+        },
+        {
+          "id": "r4c4",
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "edges": [
+        [
+          "r0c0",
+          "r0c1"
+        ],
+        [
+          "r0c0",
+          "r1c0"
+        ],
+        [
+          "r0c1",
+          "r0c2"
+        ],
+        [
+          "r0c1",
+          "r1c1"
+        ],
+        [
+          "r0c2",
+          "r0c3"
+        ],
+        [
+          "r0c2",
+          "r1c2"
+        ],
+        [
+          "r0c3",
+          "r0c4"
+        ],
+        [
+          "r0c3",
+          "r1c3"
+        ],
+        [
+          "r0c4",
+          "r1c4"
+        ],
+        [
+          "r1c0",
+          "r1c1"
+        ],
+        [
+          "r1c0",
+          "r2c0"
+        ],
+        [
+          "r1c1",
+          "r1c2"
+        ],
+        [
+          "r1c1",
+          "r2c1"
+        ],
+        [
+          "r1c2",
+          "r1c3"
+        ],
+        [
+          "r1c2",
+          "r2c2"
+        ],
+        [
+          "r1c3",
+          "r1c4"
+        ],
+        [
+          "r1c3",
+          "r2c3"
+        ],
+        [
+          "r1c4",
+          "r2c4"
+        ],
+        [
+          "r2c0",
+          "r2c1"
+        ],
+        [
+          "r2c0",
+          "r3c0"
+        ],
+        [
+          "r2c1",
+          "r2c2"
+        ],
+        [
+          "r2c1",
+          "r3c1"
+        ],
+        [
+          "r2c2",
+          "r2c3"
+        ],
+        [
+          "r2c2",
+          "r3c2"
+        ],
+        [
+          "r2c3",
+          "r2c4"
+        ],
+        [
+          "r2c3",
+          "r3c3"
+        ],
+        [
+          "r2c4",
+          "r3c4"
+        ],
+        [
+          "r3c0",
+          "r3c1"
+        ],
+        [
+          "r3c0",
+          "r4c0"
+        ],
+        [
+          "r3c1",
+          "r3c2"
+        ],
+        [
+          "r3c1",
+          "r4c1"
+        ],
+        [
+          "r3c2",
+          "r3c3"
+        ],
+        [
+          "r3c2",
+          "r4c2"
+        ],
+        [
+          "r3c3",
+          "r3c4"
+        ],
+        [
+          "r3c3",
+          "r4c3"
+        ],
+        [
+          "r3c4",
+          "r4c4"
+        ],
+        [
+          "r4c0",
+          "r4c1"
+        ],
+        [
+          "r4c1",
+          "r4c2"
+        ],
+        [
+          "r4c2",
+          "r4c3"
+        ],
+        [
+          "r4c3",
+          "r4c4"
+        ]
+      ]
     }
   ],
   "enemyArchetypes": [
@@ -1897,23 +2973,23 @@
     {
       "id": "S01",
       "name": "1층 복도 — 처음부터 소란",
-      "board": "grid2x7",
-      "playerStart": "r0c1",
+      "board": "grid3x7_v1",
+      "playerStart": "r1c1",
       "enemies": [
         {
           "id": "e1",
           "archetype": "duelist",
-          "node": "r0c4"
+          "node": "r1c4"
         },
         {
           "id": "e2",
           "archetype": "dust",
-          "node": "r1c3"
+          "node": "r0c4"
         },
         {
           "id": "e3",
           "archetype": "dust",
-          "node": "r1c5"
+          "node": "r2c4"
         }
       ],
       "objective": "kill_all",
@@ -1926,17 +3002,17 @@
             {
               "id": "e1",
               "archetype": "duelist",
-              "node": "r0c4"
+              "node": "r1c4"
             },
             {
               "id": "e2",
               "archetype": "dust",
-              "node": "r1c3"
+              "node": "r0c4"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r1c5"
+              "node": "r2c4"
             }
           ]
         }
@@ -1945,28 +3021,28 @@
     {
       "id": "S02",
       "name": "공동 세탁실",
-      "board": "grid2x7",
-      "playerStart": "r0c1",
+      "board": "grid3x7_v1",
+      "playerStart": "r1c1",
       "enemies": [
         {
           "id": "e1",
           "archetype": "grunt",
-          "node": "r0c5"
+          "node": "r0c4"
         },
         {
           "id": "e2",
           "archetype": "grunt",
-          "node": "r1c5"
+          "node": "r2c4"
         },
         {
           "id": "e3",
           "archetype": "dust",
-          "node": "r0c6"
+          "node": "r1c5"
         },
         {
           "id": "e4",
           "archetype": "dust",
-          "node": "r1c6"
+          "node": "r2c6"
         }
       ],
       "objective": "kill_all",
@@ -1979,22 +3055,22 @@
             {
               "id": "e1",
               "archetype": "grunt",
-              "node": "r0c5"
+              "node": "r0c4"
             },
             {
               "id": "e2",
               "archetype": "grunt",
-              "node": "r1c5"
+              "node": "r2c4"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r0c6"
+              "node": "r1c5"
             },
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r1c6"
+              "node": "r2c6"
             }
           ]
         },
@@ -2005,17 +3081,17 @@
             {
               "id": "e1",
               "archetype": "guard",
-              "node": "r0c5"
+              "node": "r1c4"
             },
             {
               "id": "e2",
               "archetype": "dust",
-              "node": "r1c5"
+              "node": "r0c5"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r1c6"
+              "node": "r2c5"
             }
           ]
         }
@@ -2024,23 +3100,23 @@
     {
       "id": "S03",
       "name": "순환 계단",
-      "board": "ring8",
+      "board": "ring12_v1",
       "playerStart": "r0",
       "enemies": [
         {
           "id": "e1",
           "archetype": "hunter",
-          "node": "r4"
+          "node": "r6"
         },
         {
           "id": "e2",
           "archetype": "dust",
-          "node": "r3"
+          "node": "r4"
         },
         {
           "id": "e3",
           "archetype": "dust",
-          "node": "r5"
+          "node": "r8"
         }
       ],
       "objective": "survive",
@@ -2054,17 +3130,17 @@
             {
               "id": "e1",
               "archetype": "hunter",
-              "node": "r4"
+              "node": "r6"
             },
             {
               "id": "e2",
               "archetype": "dust",
-              "node": "r3"
+              "node": "r4"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r5"
+              "node": "r8"
             }
           ]
         },
@@ -2075,12 +3151,12 @@
             {
               "id": "e1",
               "archetype": "hunter",
-              "node": "r4"
+              "node": "r6"
             },
             {
               "id": "e2",
               "archetype": "grunt",
-              "node": "r6"
+              "node": "r8"
             }
           ]
         }
@@ -2089,8 +3165,8 @@
     {
       "id": "S04",
       "name": "막힌 현관",
-      "board": "grid3x5",
-      "playerStart": "r1c0",
+      "board": "grid4x6_v1",
+      "playerStart": "r1c1",
       "enemies": [
         {
           "id": "e1",
@@ -2100,12 +3176,12 @@
         {
           "id": "e2",
           "archetype": "dust",
-          "node": "r0c3"
+          "node": "r0c4"
         },
         {
           "id": "e3",
           "archetype": "dust",
-          "node": "r2c3"
+          "node": "r3c4"
         }
       ],
       "objective": "kill_all",
@@ -2123,12 +3199,12 @@
             {
               "id": "e2",
               "archetype": "dust",
-              "node": "r0c3"
+              "node": "r0c4"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r2c3"
+              "node": "r3c4"
             }
           ]
         },
@@ -2149,7 +3225,7 @@
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r2c4"
+              "node": "r3c4"
             }
           ]
         }
@@ -2158,7 +3234,7 @@
     {
       "id": "S05",
       "name": "냉장고 속",
-      "board": "grid3x5",
+      "board": "grid4x6_v1",
       "playerStart": "r1c1",
       "enemies": [
         {
@@ -2179,7 +3255,7 @@
         {
           "id": "e4",
           "archetype": "dust",
-          "node": "r2c3"
+          "node": "r3c4"
         }
       ],
       "objective": "kill_all",
@@ -2207,7 +3283,7 @@
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r2c3"
+              "node": "r3c4"
             }
           ]
         },
@@ -2228,7 +3304,7 @@
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r1c3"
+              "node": "r0c5"
             },
             {
               "id": "e4",
@@ -2238,7 +3314,7 @@
             {
               "id": "e5",
               "archetype": "dust",
-              "node": "r0c3"
+              "node": "r3c4"
             }
           ]
         }
@@ -2247,18 +3323,18 @@
     {
       "id": "S06",
       "name": "고장 난 엘리베이터",
-      "board": "fork10",
-      "playerStart": "s0",
+      "board": "fork14_v1",
+      "playerStart": "s2",
       "enemies": [
         {
           "id": "e1",
           "archetype": "clockmaker",
-          "node": "a2"
+          "node": "a3"
         },
         {
           "id": "e2",
           "archetype": "marksman",
-          "node": "b2"
+          "node": "b3"
         }
       ],
       "objective": "kill_target",
@@ -2272,12 +3348,12 @@
             {
               "id": "e1",
               "archetype": "clockmaker",
-              "node": "a2"
+              "node": "a3"
             },
             {
               "id": "e2",
               "archetype": "marksman",
-              "node": "b2"
+              "node": "b3"
             }
           ]
         },
@@ -2288,17 +3364,17 @@
             {
               "id": "e1",
               "archetype": "clockmaker",
-              "node": "a2"
+              "node": "a3"
             },
             {
               "id": "e2",
               "archetype": "grunt",
-              "node": "b1"
+              "node": "b2"
             },
             {
               "id": "e3",
               "archetype": "grunt",
-              "node": "b2"
+              "node": "b3"
             }
           ]
         }
@@ -2307,33 +3383,33 @@
     {
       "id": "S07",
       "name": "옥상",
-      "board": "grid3x5",
-      "playerStart": "r1c0",
+      "board": "grid4x6_v1",
+      "playerStart": "r1c1",
       "enemies": [
         {
           "id": "e1",
           "archetype": "marksman",
-          "node": "r0c4"
+          "node": "r0c5"
         },
         {
           "id": "e2",
           "archetype": "marksman",
-          "node": "r2c4"
+          "node": "r3c5"
         },
         {
           "id": "e3",
           "archetype": "harrier",
-          "node": "r1c3"
+          "node": "r2c4"
         },
         {
           "id": "e4",
           "archetype": "dust",
-          "node": "r0c3"
+          "node": "r0c4"
         },
         {
           "id": "e5",
           "archetype": "dust",
-          "node": "r2c3"
+          "node": "r3c4"
         }
       ],
       "objective": "kill_all",
@@ -2346,27 +3422,27 @@
             {
               "id": "e1",
               "archetype": "marksman",
-              "node": "r0c4"
+              "node": "r0c5"
             },
             {
               "id": "e2",
               "archetype": "marksman",
-              "node": "r2c4"
+              "node": "r3c5"
             },
             {
               "id": "e3",
               "archetype": "harrier",
-              "node": "r1c3"
+              "node": "r2c4"
             },
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r0c3"
+              "node": "r0c4"
             },
             {
               "id": "e5",
               "archetype": "dust",
-              "node": "r2c3"
+              "node": "r3c4"
             }
           ]
         },
@@ -2377,7 +3453,7 @@
             {
               "id": "e1",
               "archetype": "marksman",
-              "node": "r0c4"
+              "node": "r0c5"
             },
             {
               "id": "e2",
@@ -2387,17 +3463,17 @@
             {
               "id": "e3",
               "archetype": "harrier",
-              "node": "r1c3"
+              "node": "r3c5"
             },
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r0c3"
+              "node": "r0c4"
             },
             {
               "id": "e5",
               "archetype": "dust",
-              "node": "r2c3"
+              "node": "r3c4"
             }
           ]
         }
@@ -2406,23 +3482,23 @@
     {
       "id": "S08",
       "name": "404호",
-      "board": "ring8",
+      "board": "ring12_v1",
       "playerStart": "r0",
       "enemies": [
         {
           "id": "e1",
           "archetype": "arbiter",
-          "node": "r4"
+          "node": "r6"
         },
         {
           "id": "e2",
           "archetype": "harrier",
-          "node": "r2"
+          "node": "r4"
         },
         {
           "id": "e3",
           "archetype": "harrier",
-          "node": "r6"
+          "node": "r8"
         }
       ],
       "objective": "survive",
@@ -2436,17 +3512,17 @@
             {
               "id": "e1",
               "archetype": "arbiter",
-              "node": "r4"
+              "node": "r6"
             },
             {
               "id": "e2",
               "archetype": "harrier",
-              "node": "r2"
+              "node": "r4"
             },
             {
               "id": "e3",
               "archetype": "harrier",
-              "node": "r6"
+              "node": "r8"
             }
           ]
         },
@@ -2457,22 +3533,22 @@
             {
               "id": "e1",
               "archetype": "arbiter",
-              "node": "r4"
+              "node": "r6"
             },
             {
               "id": "e2",
               "archetype": "grunt",
-              "node": "r2"
+              "node": "r4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r8"
             },
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r3"
-            },
-            {
-              "id": "e5",
-              "archetype": "dust",
-              "node": "r5"
+              "node": "r10"
             }
           ]
         }
@@ -2481,8 +3557,8 @@
     {
       "id": "S09",
       "name": "벽 속 복도",
-      "board": "grid3x5",
-      "playerStart": "r1c0",
+      "board": "grid4x6_v1",
+      "playerStart": "r1c1",
       "objective": "kill_all",
       "designNote": "후반 혼합 조합; 관리실 이전 단계",
       "variants": [
@@ -2493,22 +3569,22 @@
             {
               "id": "e1",
               "archetype": "guard",
-              "node": "r1c4"
+              "node": "r1c5"
             },
             {
               "id": "e2",
               "archetype": "harrier",
-              "node": "r2c4"
+              "node": "r2c5"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r0c3"
+              "node": "r0c4"
             },
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r0c4"
+              "node": "r3c4"
             }
           ]
         },
@@ -2519,12 +3595,12 @@
             {
               "id": "e1",
               "archetype": "brute",
-              "node": "r1c4"
+              "node": "r1c5"
             },
             {
               "id": "e2",
               "archetype": "marksman",
-              "node": "r0c4"
+              "node": "r0c5"
             }
           ]
         }
@@ -2533,50 +3609,50 @@
         {
           "id": "e1",
           "archetype": "guard",
-          "node": "r1c4"
+          "node": "r1c5"
         },
         {
           "id": "e2",
           "archetype": "harrier",
-          "node": "r2c4"
+          "node": "r2c5"
         },
         {
           "id": "e3",
           "archetype": "dust",
-          "node": "r0c3"
+          "node": "r0c4"
         },
         {
           "id": "e4",
           "archetype": "dust",
-          "node": "r0c4"
+          "node": "r3c4"
         }
       ]
     },
     {
       "id": "S10",
       "name": "관리실",
-      "board": "grid4x4",
+      "board": "grid5x5_v1",
       "playerStart": "r2c0",
       "enemies": [
         {
           "id": "e1",
           "archetype": "boss",
-          "node": "r1c3"
+          "node": "r2c4"
         },
         {
           "id": "e2",
           "archetype": "dust",
-          "node": "r0c3"
+          "node": "r0c4"
         },
         {
           "id": "e3",
           "archetype": "dust",
-          "node": "r2c3"
+          "node": "r3c4"
         },
         {
           "id": "e4",
           "archetype": "dust",
-          "node": "r3c3"
+          "node": "r4c4"
         }
       ],
       "objective": "kill_target",
@@ -2590,22 +3666,22 @@
             {
               "id": "e1",
               "archetype": "boss",
-              "node": "r1c3"
+              "node": "r2c4"
             },
             {
               "id": "e2",
               "archetype": "dust",
-              "node": "r0c3"
+              "node": "r0c4"
             },
             {
               "id": "e3",
               "archetype": "dust",
-              "node": "r2c3"
+              "node": "r3c4"
             },
             {
               "id": "e4",
               "archetype": "dust",
-              "node": "r3c3"
+              "node": "r4c4"
             }
           ]
         }
