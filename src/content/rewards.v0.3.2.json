@@ -1,0 +1,299 @@
+{
+  "content_version": "0.3.2-design",
+  "approval": "user_confirmed_policy_update",
+  "battle_rewards": {
+    "gold": 12,
+    "bonus_type_one_roll": {
+      "card": 0.6,
+      "item": 0.3,
+      "relic": 0.1
+    },
+    "pre_final_battle_count": 9,
+    "selection_detail": "card_3_pick_1_item_2_pick_1_relic_1"
+  },
+  "run_sequence": [
+    "start_boon",
+    "start_shop",
+    "battle_1",
+    "battle_2",
+    "battle_3",
+    "rest",
+    "battle_4",
+    "battle_5",
+    "shop",
+    "battle_6",
+    "battle_7",
+    "rest",
+    "battle_8",
+    "battle_9",
+    "shop",
+    "battle_10_boss"
+  ],
+  "shop": {
+    "stock_per_visit": {
+      "item": 3,
+      "relic": 2,
+      "card": 3
+    },
+    "relic_rarity_mix": "random_no_fixed_general_advanced_pair",
+    "price_ranges_gold": {
+      "card": [
+        25,
+        35
+      ],
+      "item": [
+        45,
+        55
+      ],
+      "relic_common": [
+        75,
+        85
+      ],
+      "relic_advanced": [
+        105,
+        115
+      ]
+    },
+    "extra_services": "TBD",
+    "start_shop_rules": {
+      "stock_per_visit": {
+        "item": 3,
+        "relic": 2,
+        "card": 3
+      },
+      "relic_allowed_rarity": [
+        "일반"
+      ],
+      "relic_candidate_ids": [
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08"
+      ],
+      "advanced_relics_allowed": false,
+      "disallow_relic_ids": [
+        "R01",
+        "R02",
+        "R03",
+        "R09"
+      ]
+    },
+    "later_shop_rules": {
+      "after_battles": [
+        5,
+        9
+      ],
+      "relic_allowed_rarity": [
+        "일반",
+        "고급"
+      ],
+      "rarity_mix": "unconstrained"
+    }
+  },
+  "items": [
+    {
+      "id": "I01",
+      "name": "낡은 운동화",
+      "description": "이번 턴 다음 이동 행동의 이동력 +2",
+      "effect_key": "next_move_plus_2",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "active"
+    },
+    {
+      "id": "I02",
+      "name": "두꺼운 외투",
+      "description": "공격을 받을 때 사용. 해당 공격의 HP 피해 1 감소. 짧은 휴식 후 다시 사용 가능.",
+      "effect_key": "reduce_one_incoming_hp_damage",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": true,
+      "activation": "react_hit"
+    },
+    {
+      "id": "I03",
+      "name": "소독약",
+      "description": "자신의 중독 또는 출혈 하나를 완전히 제거",
+      "effect_key": "cleanse_poison_or_bleed",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "active"
+    },
+    {
+      "id": "I04",
+      "name": "손전등",
+      "description": "인접 적 하나에게 노출 1. 짧은 휴식 후 다시 사용 가능.",
+      "effect_key": "expose_one_adjacent_enemy",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": true,
+      "activation": "active"
+    },
+    {
+      "id": "I05",
+      "name": "청색 테이프",
+      "description": "거리 2 이내 적 하나에게 속박 1",
+      "effect_key": "bind_one_range_2",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "active"
+    },
+    {
+      "id": "I06",
+      "name": "긴 막대",
+      "description": "인접 적 하나를 밀치기 2",
+      "effect_key": "push_one_adjacent_2",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "active"
+    },
+    {
+      "id": "I07",
+      "name": "빨간 호루라기",
+      "description": "인접한 모든 적에게 약화 1",
+      "effect_key": "weaken_all_adjacent_1",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "active"
+    },
+    {
+      "id": "I08",
+      "name": "캔커피",
+      "description": "자신의 약화 또는 노출 하나를 완전히 제거",
+      "effect_key": "cleanse_weak_or_exposed",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "active"
+    },
+    {
+      "id": "I09",
+      "name": "무릎 보호대",
+      "description": "자신에게 적용되는 밀치기 또는 당기기 한 번 무효화",
+      "effect_key": "negate_incoming_push_or_pull",
+      "uses_per_battle": 1,
+      "recharge_on_short_rest": false,
+      "activation": "react_force"
+    }
+  ],
+  "relics": [
+    {
+      "id": "R01",
+      "name": "그림자 발걸음",
+      "rarity": "고급",
+      "description": "전투를 원하는 칸에서 시작할 수 있음",
+      "effect_key": "choose_start_tile",
+      "acquisition": "both"
+    },
+    {
+      "id": "R02",
+      "name": "예언자의 눈",
+      "rarity": "고급",
+      "description": "짧은 휴식에서 무작위 소실 후보 2장 중 1장 선택",
+      "effect_key": "short_rest_choose_1_of_2_loss",
+      "acquisition": "both"
+    },
+    {
+      "id": "R03",
+      "name": "여분의 장부",
+      "rarity": "고급",
+      "description": "전투 출전 카드 최대 매수 +1 (8→9장)",
+      "effect_key": "battle_deck_max_plus_1",
+      "acquisition": "shop_only"
+    },
+    {
+      "id": "R04",
+      "name": "오래된 우편함",
+      "rarity": "일반",
+      "description": "최대 HP +7. 획득 시 현재 HP도 7 회복",
+      "effect_key": "max_hp_and_current_plus_7",
+      "acquisition": "both"
+    },
+    {
+      "id": "R05",
+      "name": "깨진 초인종",
+      "rarity": "일반",
+      "description": "전투당 첫 적 밀치기·당기기 성공 시 해당 적에게 노출 1",
+      "effect_key": "first_successful_forced_move_expose_1",
+      "acquisition": "both"
+    },
+    {
+      "id": "R06",
+      "name": "고장 난 인터폰",
+      "rarity": "일반",
+      "description": "전투 시작 시 원하는 적 하나에게 약화 1",
+      "effect_key": "choose_enemy_weaken_1_at_start",
+      "acquisition": "both"
+    },
+    {
+      "id": "R07",
+      "name": "예비 건전지",
+      "rarity": "일반",
+      "description": "아이템 사용 시 방어도 2 획득",
+      "effect_key": "on_each_item_use_block_2",
+      "acquisition": "both"
+    },
+    {
+      "id": "R08",
+      "name": "현관 감지 센서",
+      "rarity": "일반",
+      "description": "전투당 처음 적과 인접한 채 차례를 마치면 방어도 3 획득",
+      "effect_key": "first_end_turn_adjacent_block_3",
+      "acquisition": "both"
+    },
+    {
+      "id": "R09",
+      "name": "비상금",
+      "rarity": "일반",
+      "description": "100G 획득",
+      "effect_key": "grant_100_gold_on_pickup",
+      "acquisition": "battle_reward_only"
+    }
+  ],
+  "unresolved": [
+    "future_upgrade_reactivation_location",
+    "final_boss_growth_reward_policy"
+  ],
+  "starting_economy": {
+    "initial_gold": 100,
+    "grant_timing": "before_start_shop",
+    "neow_style_boon_options": "TBD",
+    "initial_gold_is_fixed_base_amount": true,
+    "do_not_double_grant_neow_gold": true
+  },
+  "shops_schedule": {
+    "start_shop": "after_initial_gold_before_battle_1",
+    "normal_shops": "after_battles_5_and_9"
+  },
+  "regional_rest": {
+    "after_battles": [
+      3,
+      7
+    ],
+    "available_actions": [
+      "heal_hp"
+    ],
+    "heal_hp": 8,
+    "heal_value_origin": "preserve_existing_v0.3_value",
+    "upgrade_option_enabled": false,
+    "preserve_card_upgrade_data_and_engine": true,
+    "future_upgrade_reactivation": "TBD",
+    "distinct_from_in_combat_short_rest": true
+  },
+  "confirmed_decisions": {
+    "gold_per_win": 12,
+    "card_candidates": 3,
+    "item_candidates": 2,
+    "relic_candidates": 1,
+    "item_slots": 2,
+    "duplicates": false,
+    "pool_exhaustion_extra_gold": 30,
+    "shop_price_policy": "seeded_integer_within_category_range_fixed_during_visit",
+    "sold_out_on_purchase": true,
+    "restock": false,
+    "refund": false,
+    "start": "100G_then_start_shop",
+    "shop_services": false,
+    "item_timing": "keep_current_implementation",
+    "R01_R06_start": "keep_current_implementation",
+    "R09": "once_per_run"
+  }
+}

@@ -1,0 +1,2854 @@
+{
+  "schemaVersion": 3,
+  "prototypeName": "더큰그린빌 (가제)",
+  "character": {
+    "id": "wanderer",
+    "name": "방문자",
+    "maxHp": 40,
+    "deckCapacity": 8,
+    "initialOwnedCards": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08"
+    ],
+    "initialEquippedCards": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08"
+    ],
+    "displayName": "방문자"
+  },
+  "cards": [
+    {
+      "id": "C01",
+      "name": "재빠른 일격",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 1
+          },
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 1
+          },
+          {
+            "type": "move",
+            "distance": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "C02",
+      "name": "안정된 자세",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 5,
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "block",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "C03",
+      "name": "관찰하기",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "status",
+            "status": "exposed",
+            "stacks": 2,
+            "target": "one_enemy",
+            "range": "any"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "status",
+            "status": "weak",
+            "stacks": 2,
+            "target": "one_enemy",
+            "range": "any"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C04",
+      "name": "커다란 한 방",
+      "pool": "start",
+      "top": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 8,
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 1
+          },
+          {
+            "type": "block",
+            "amount": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "C05",
+      "name": "유연한 일격",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 4,
+            "range": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C06",
+      "name": "파쇄",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 4,
+            "range": 1,
+            "pierce_block": true
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 1,
+            "pierce_block": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "C07",
+      "name": "밀어붙이기",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 4,
+            "range": 1
+          },
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "last_attack_target",
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "C08",
+      "name": "휩쓸기",
+      "pool": "start",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 1,
+            "target": "all_adjacent_enemies"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "C09",
+      "name": "전투 준비",
+      "pool": "reward",
+      "top": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "status",
+            "status": "exposed",
+            "stacks": 3,
+            "target": "all_enemies",
+            "range": "any"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "status",
+            "status": "exposed",
+            "stacks": 1,
+            "target": "all_enemies",
+            "range": "any"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C10",
+      "name": "묶기",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 1
+          },
+          {
+            "type": "status",
+            "status": "bind",
+            "stacks": 1,
+            "target": "last_attack_target",
+            "range": "any"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "status",
+            "status": "bind",
+            "stacks": 1,
+            "target": "all_adjacent_enemies",
+            "range": 1
+          },
+          {
+            "type": "move",
+            "distance": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C11",
+      "name": "연속 찌르기",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 1
+          },
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 1
+          },
+          {
+            "type": "attack",
+            "damage": 1,
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "status",
+            "status": "exposed",
+            "stacks": 1,
+            "target": "one_enemy",
+            "range": 1
+          },
+          {
+            "type": "status",
+            "status": "weak",
+            "stacks": 1,
+            "target": "one_enemy",
+            "range": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C12",
+      "name": "독침",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 3
+          },
+          {
+            "type": "status",
+            "status": "poison",
+            "stacks": 2,
+            "target": "last_attack_target",
+            "range": "any"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "status",
+            "status": "poison",
+            "stacks": 2,
+            "target": "one_enemy",
+            "range": 1
+          },
+          {
+            "type": "move",
+            "distance": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C13",
+      "name": "더욱 유연한 일격",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          },
+          {
+            "type": "attack",
+            "damage": 1,
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 5,
+            "range": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C14",
+      "name": "마름쇠 뿌리기",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "status",
+            "status": "bleed",
+            "stacks": 1,
+            "target": "all_enemies",
+            "range": 2
+          }
+        ]
+      },
+      "bottom": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "status",
+            "status": "bleed",
+            "stacks": 2,
+            "target": "all_enemies",
+            "range": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "C15",
+      "name": "자리 잡기",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "one_enemy",
+            "range": 1
+          },
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 1
+          },
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "one_enemy",
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "one_enemy",
+            "range": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C16",
+      "name": "무장해제",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 1,
+            "range": 1
+          },
+          {
+            "type": "status",
+            "status": "disarm",
+            "stacks": 1,
+            "target": "last_attack_target",
+            "range": "any"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "C17",
+      "name": "고통 감수",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "self_hp_loss",
+            "amount": 2
+          },
+          {
+            "type": "attack",
+            "damage": 8,
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "self_hp_loss",
+            "amount": 2
+          },
+          {
+            "type": "move",
+            "distance": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "C18",
+      "name": "기회 포착",
+      "pool": "reward",
+      "top": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 4,
+            "range": 1,
+            "bonus_damage": 4,
+            "condition": "target_original_intent_nonattack"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 3,
+            "range": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "C19",
+      "name": "진형 붕괴",
+      "pool": "reward",
+      "top": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 5,
+            "range": 1,
+            "target": "all_adjacent_enemies"
+          }
+        ]
+      },
+      "bottom": {
+        "loss": false,
+        "steps": [
+          {
+            "type": "move",
+            "distance": 1
+          },
+          {
+            "type": "attack",
+            "damage": 2,
+            "range": 1
+          },
+          {
+            "type": "push",
+            "distance": 1,
+            "target": "last_attack_target",
+            "range": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "C20",
+      "name": "마지막 수",
+      "pool": "reward",
+      "top": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "attack",
+            "damage": 11,
+            "range": 1
+          }
+        ]
+      },
+      "bottom": {
+        "loss": true,
+        "steps": [
+          {
+            "type": "block",
+            "amount": 9
+          },
+          {
+            "type": "move",
+            "distance": 1
+          }
+        ]
+      }
+    }
+  ],
+  "boards": [
+    {
+      "id": "line9",
+      "kind": "line",
+      "nodes": [
+        {
+          "id": "l0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "l1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "l2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "l3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "l4",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "l5",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "l6",
+          "x": 6,
+          "y": 0
+        },
+        {
+          "id": "l7",
+          "x": 7,
+          "y": 0
+        },
+        {
+          "id": "l8",
+          "x": 8,
+          "y": 0
+        }
+      ],
+      "edges": [
+        [
+          "l0",
+          "l1"
+        ],
+        [
+          "l1",
+          "l2"
+        ],
+        [
+          "l2",
+          "l3"
+        ],
+        [
+          "l3",
+          "l4"
+        ],
+        [
+          "l4",
+          "l5"
+        ],
+        [
+          "l5",
+          "l6"
+        ],
+        [
+          "l6",
+          "l7"
+        ],
+        [
+          "l7",
+          "l8"
+        ]
+      ]
+    },
+    {
+      "id": "ring8",
+      "kind": "ring",
+      "nodes": [
+        {
+          "id": "r0",
+          "index": 0
+        },
+        {
+          "id": "r1",
+          "index": 1
+        },
+        {
+          "id": "r2",
+          "index": 2
+        },
+        {
+          "id": "r3",
+          "index": 3
+        },
+        {
+          "id": "r4",
+          "index": 4
+        },
+        {
+          "id": "r5",
+          "index": 5
+        },
+        {
+          "id": "r6",
+          "index": 6
+        },
+        {
+          "id": "r7",
+          "index": 7
+        }
+      ],
+      "edges": [
+        [
+          "r0",
+          "r1"
+        ],
+        [
+          "r1",
+          "r2"
+        ],
+        [
+          "r2",
+          "r3"
+        ],
+        [
+          "r3",
+          "r4"
+        ],
+        [
+          "r4",
+          "r5"
+        ],
+        [
+          "r5",
+          "r6"
+        ],
+        [
+          "r6",
+          "r7"
+        ],
+        [
+          "r7",
+          "r0"
+        ]
+      ]
+    },
+    {
+      "id": "grid2x7",
+      "kind": "grid",
+      "nodes": [
+        {
+          "id": "r0c0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "r0c1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "r0c2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "r0c3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "r0c4",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "r0c5",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "r0c6",
+          "x": 6,
+          "y": 0
+        },
+        {
+          "id": "r1c0",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "id": "r1c1",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "r1c2",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "id": "r1c3",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "id": "r1c4",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "r1c5",
+          "x": 5,
+          "y": 1
+        },
+        {
+          "id": "r1c6",
+          "x": 6,
+          "y": 1
+        }
+      ],
+      "edges": [
+        [
+          "r0c0",
+          "r0c1"
+        ],
+        [
+          "r0c1",
+          "r0c2"
+        ],
+        [
+          "r0c2",
+          "r0c3"
+        ],
+        [
+          "r0c3",
+          "r0c4"
+        ],
+        [
+          "r0c4",
+          "r0c5"
+        ],
+        [
+          "r0c5",
+          "r0c6"
+        ],
+        [
+          "r1c0",
+          "r1c1"
+        ],
+        [
+          "r1c1",
+          "r1c2"
+        ],
+        [
+          "r1c2",
+          "r1c3"
+        ],
+        [
+          "r1c3",
+          "r1c4"
+        ],
+        [
+          "r1c4",
+          "r1c5"
+        ],
+        [
+          "r1c5",
+          "r1c6"
+        ],
+        [
+          "r0c0",
+          "r1c0"
+        ],
+        [
+          "r0c1",
+          "r1c1"
+        ],
+        [
+          "r0c2",
+          "r1c2"
+        ],
+        [
+          "r0c3",
+          "r1c3"
+        ],
+        [
+          "r0c4",
+          "r1c4"
+        ],
+        [
+          "r0c5",
+          "r1c5"
+        ],
+        [
+          "r0c6",
+          "r1c6"
+        ]
+      ]
+    },
+    {
+      "id": "grid3x5",
+      "kind": "grid",
+      "nodes": [
+        {
+          "id": "r0c0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "r0c1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "r0c2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "r0c3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "r0c4",
+          "x": 4,
+          "y": 0
+        },
+        {
+          "id": "r1c0",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "id": "r1c1",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "r1c2",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "id": "r1c3",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "id": "r1c4",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "r2c0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "r2c1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "r2c2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "r2c3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "r2c4",
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "edges": [
+        [
+          "r0c0",
+          "r0c1"
+        ],
+        [
+          "r0c1",
+          "r0c2"
+        ],
+        [
+          "r0c2",
+          "r0c3"
+        ],
+        [
+          "r0c3",
+          "r0c4"
+        ],
+        [
+          "r1c0",
+          "r1c1"
+        ],
+        [
+          "r1c1",
+          "r1c2"
+        ],
+        [
+          "r1c2",
+          "r1c3"
+        ],
+        [
+          "r1c3",
+          "r1c4"
+        ],
+        [
+          "r2c0",
+          "r2c1"
+        ],
+        [
+          "r2c1",
+          "r2c2"
+        ],
+        [
+          "r2c2",
+          "r2c3"
+        ],
+        [
+          "r2c3",
+          "r2c4"
+        ],
+        [
+          "r0c0",
+          "r1c0"
+        ],
+        [
+          "r0c1",
+          "r1c1"
+        ],
+        [
+          "r0c2",
+          "r1c2"
+        ],
+        [
+          "r0c3",
+          "r1c3"
+        ],
+        [
+          "r0c4",
+          "r1c4"
+        ],
+        [
+          "r1c0",
+          "r2c0"
+        ],
+        [
+          "r1c1",
+          "r2c1"
+        ],
+        [
+          "r1c2",
+          "r2c2"
+        ],
+        [
+          "r1c3",
+          "r2c3"
+        ],
+        [
+          "r1c4",
+          "r2c4"
+        ]
+      ]
+    },
+    {
+      "id": "grid4x4",
+      "kind": "grid",
+      "nodes": [
+        {
+          "id": "r0c0",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "r0c1",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "r0c2",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "r0c3",
+          "x": 3,
+          "y": 0
+        },
+        {
+          "id": "r1c0",
+          "x": 0,
+          "y": 1
+        },
+        {
+          "id": "r1c1",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "r1c2",
+          "x": 2,
+          "y": 1
+        },
+        {
+          "id": "r1c3",
+          "x": 3,
+          "y": 1
+        },
+        {
+          "id": "r2c0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "r2c1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "r2c2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "r2c3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "r3c0",
+          "x": 0,
+          "y": 3
+        },
+        {
+          "id": "r3c1",
+          "x": 1,
+          "y": 3
+        },
+        {
+          "id": "r3c2",
+          "x": 2,
+          "y": 3
+        },
+        {
+          "id": "r3c3",
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "edges": [
+        [
+          "r0c0",
+          "r0c1"
+        ],
+        [
+          "r0c1",
+          "r0c2"
+        ],
+        [
+          "r0c2",
+          "r0c3"
+        ],
+        [
+          "r1c0",
+          "r1c1"
+        ],
+        [
+          "r1c1",
+          "r1c2"
+        ],
+        [
+          "r1c2",
+          "r1c3"
+        ],
+        [
+          "r2c0",
+          "r2c1"
+        ],
+        [
+          "r2c1",
+          "r2c2"
+        ],
+        [
+          "r2c2",
+          "r2c3"
+        ],
+        [
+          "r3c0",
+          "r3c1"
+        ],
+        [
+          "r3c1",
+          "r3c2"
+        ],
+        [
+          "r3c2",
+          "r3c3"
+        ],
+        [
+          "r0c0",
+          "r1c0"
+        ],
+        [
+          "r0c1",
+          "r1c1"
+        ],
+        [
+          "r0c2",
+          "r1c2"
+        ],
+        [
+          "r0c3",
+          "r1c3"
+        ],
+        [
+          "r1c0",
+          "r2c0"
+        ],
+        [
+          "r1c1",
+          "r2c1"
+        ],
+        [
+          "r1c2",
+          "r2c2"
+        ],
+        [
+          "r1c3",
+          "r2c3"
+        ],
+        [
+          "r2c0",
+          "r3c0"
+        ],
+        [
+          "r2c1",
+          "r3c1"
+        ],
+        [
+          "r2c2",
+          "r3c2"
+        ],
+        [
+          "r2c3",
+          "r3c3"
+        ]
+      ]
+    },
+    {
+      "id": "fork10",
+      "kind": "graph",
+      "nodes": [
+        {
+          "id": "s0",
+          "x": 0,
+          "y": 2
+        },
+        {
+          "id": "s1",
+          "x": 1,
+          "y": 2
+        },
+        {
+          "id": "s2",
+          "x": 2,
+          "y": 2
+        },
+        {
+          "id": "s3",
+          "x": 3,
+          "y": 2
+        },
+        {
+          "id": "a0",
+          "x": 4,
+          "y": 1
+        },
+        {
+          "id": "a1",
+          "x": 5,
+          "y": 1
+        },
+        {
+          "id": "a2",
+          "x": 6,
+          "y": 1
+        },
+        {
+          "id": "b0",
+          "x": 4,
+          "y": 3
+        },
+        {
+          "id": "b1",
+          "x": 5,
+          "y": 3
+        },
+        {
+          "id": "b2",
+          "x": 6,
+          "y": 3
+        }
+      ],
+      "edges": [
+        [
+          "s0",
+          "s1"
+        ],
+        [
+          "s1",
+          "s2"
+        ],
+        [
+          "s2",
+          "s3"
+        ],
+        [
+          "s3",
+          "a0"
+        ],
+        [
+          "a0",
+          "a1"
+        ],
+        [
+          "a1",
+          "a2"
+        ],
+        [
+          "s3",
+          "b0"
+        ],
+        [
+          "b0",
+          "b1"
+        ],
+        [
+          "b1",
+          "b2"
+        ]
+      ]
+    }
+  ],
+  "enemyArchetypes": [
+    {
+      "id": "duelist",
+      "name": "결투자",
+      "hp": 18,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "slash",
+          "weight": 5,
+          "kind": "adjacent_all",
+          "damage": 4
+        },
+        {
+          "id": "heavy",
+          "weight": 3,
+          "kind": "adjacent_all",
+          "damage": 6
+        },
+        {
+          "id": "reprimand",
+          "weight": 2,
+          "kind": "adjacent_all",
+          "damage": 3,
+          "status": {
+            "status": "exposed",
+            "stacks": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "grunt",
+      "name": "잡병",
+      "hp": 7,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "cut",
+          "weight": 6,
+          "kind": "adjacent_all",
+          "damage": 3
+        },
+        {
+          "id": "lunge",
+          "weight": 2,
+          "kind": "adjacent_all",
+          "damage": 4
+        },
+        {
+          "id": "shard_cut",
+          "weight": 2,
+          "kind": "adjacent_all",
+          "damage": 2,
+          "status": {
+            "status": "bleed",
+            "stacks": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "guard",
+      "name": "방패병",
+      "hp": 16,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "shield_bash",
+          "weight": 6,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "adjacent_all",
+              "damage": 4
+            },
+            {
+              "kind": "block",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "id": "stab",
+          "weight": 3,
+          "kind": "adjacent_all",
+          "damage": 5
+        },
+        {
+          "id": "wall",
+          "weight": 1,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "adjacent_all",
+              "damage": 3
+            },
+            {
+              "kind": "block",
+              "amount": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harrier",
+      "name": "기동병",
+      "hp": 12,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 2
+      },
+      "intents": [
+        {
+          "id": "double",
+          "weight": 5,
+          "kind": "adjacent_all",
+          "damage": 3,
+          "hits": 2
+        },
+        {
+          "id": "cut",
+          "weight": 3,
+          "kind": "adjacent_all",
+          "damage": 5
+        },
+        {
+          "id": "trip",
+          "weight": 2,
+          "kind": "adjacent_all",
+          "damage": 2,
+          "status": {
+            "status": "bind",
+            "stacks": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "marksman",
+      "name": "사수",
+      "hp": 12,
+      "preTurnMove": {
+        "mode": "maintain_range",
+        "steps": 1,
+        "desiredRange": 3
+      },
+      "intents": [
+        {
+          "id": "aim",
+          "weight": 7,
+          "kind": "marked",
+          "damage": 6,
+          "range": 4
+        },
+        {
+          "id": "double_shot",
+          "weight": 3,
+          "kind": "marked",
+          "damage": 3,
+          "range": 4,
+          "hits": 2
+        }
+      ]
+    },
+    {
+      "id": "poisoner",
+      "name": "독술사",
+      "hp": 14,
+      "preTurnMove": {
+        "mode": "maintain_range",
+        "steps": 1,
+        "desiredRange": 2
+      },
+      "intents": [
+        {
+          "id": "venom",
+          "weight": 6,
+          "kind": "marked",
+          "damage": 3,
+          "range": 3,
+          "status": {
+            "status": "poison",
+            "stacks": 1
+          }
+        },
+        {
+          "id": "poison_cloud",
+          "weight": 4,
+          "kind": "marked",
+          "damage": 2,
+          "range": 3,
+          "status": {
+            "status": "poison",
+            "stacks": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "brute",
+      "name": "광전사",
+      "hp": 26,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "strike",
+          "weight": 6,
+          "kind": "adjacent_all",
+          "damage": 7
+        },
+        {
+          "id": "windup",
+          "weight": 4,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "adjacent_all",
+              "damage": 5
+            },
+            {
+              "kind": "buff_attack",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clockmaker",
+      "name": "시계공",
+      "hp": 24,
+      "preTurnMove": {
+        "mode": "hold",
+        "steps": 0
+      },
+      "intents": [
+        {
+          "id": "jab",
+          "weight": 3,
+          "kind": "marked",
+          "damage": 4,
+          "range": 3
+        },
+        {
+          "id": "late",
+          "weight": 1,
+          "kind": "marked",
+          "damage": 2,
+          "range": 3,
+          "status": {
+            "status": "bind",
+            "stacks": 1
+          }
+        },
+        {
+          "id": "repair",
+          "weight": 3,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "marked",
+              "damage": 3,
+              "range": 3
+            },
+            {
+              "kind": "heal",
+              "amount": 2
+            }
+          ]
+        },
+        {
+          "id": "guard",
+          "weight": 3,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "marked",
+              "damage": 2,
+              "range": 3
+            },
+            {
+              "kind": "block",
+              "amount": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hunter",
+      "name": "추격자",
+      "hp": 99,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 2
+      },
+      "intents": [
+        {
+          "id": "slash",
+          "weight": 5,
+          "kind": "adjacent_all",
+          "damage": 5
+        },
+        {
+          "id": "double",
+          "weight": 5,
+          "kind": "adjacent_all",
+          "damage": 3,
+          "hits": 2
+        }
+      ],
+      "unkillable": true
+    },
+    {
+      "id": "arbiter",
+      "name": "재판관",
+      "hp": 25,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "smite",
+          "weight": 5,
+          "kind": "adjacent_all",
+          "damage": 7
+        },
+        {
+          "id": "weaken",
+          "weight": 3,
+          "kind": "marked",
+          "damage": 3,
+          "range": 2,
+          "status": {
+            "status": "weak",
+            "stacks": 1
+          }
+        },
+        {
+          "id": "order",
+          "weight": 1,
+          "kind": "marked",
+          "damage": 2,
+          "range": 2,
+          "status": {
+            "status": "disarm",
+            "stacks": 1
+          }
+        },
+        {
+          "id": "charge",
+          "weight": 1,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "adjacent_all",
+              "damage": 5
+            },
+            {
+              "kind": "buff_attack",
+              "amount": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boss",
+      "name": "최후의 심판자",
+      "hp": 42,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "strike",
+          "weight": 4,
+          "kind": "adjacent_all",
+          "damage": 7
+        },
+        {
+          "id": "double",
+          "weight": 3,
+          "kind": "adjacent_all",
+          "damage": 4,
+          "hits": 2
+        },
+        {
+          "id": "guard",
+          "weight": 2,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "adjacent_all",
+              "damage": 4
+            },
+            {
+              "kind": "block",
+              "amount": 4
+            }
+          ]
+        },
+        {
+          "id": "doom",
+          "weight": 1,
+          "kind": "sequence",
+          "steps": [
+            {
+              "kind": "adjacent_all",
+              "damage": 5
+            },
+            {
+              "kind": "buff_attack",
+              "amount": 2
+            }
+          ]
+        }
+      ],
+      "phase2AtHp": 21,
+      "phase2AttackBonus": 1
+    },
+    {
+      "id": "dust",
+      "name": "먼지뭉치",
+      "hp": 3,
+      "preTurnMove": {
+        "mode": "approach",
+        "steps": 1
+      },
+      "intents": [
+        {
+          "id": "nudge",
+          "weight": 7,
+          "kind": "adjacent_all",
+          "damage": 2
+        },
+        {
+          "id": "sneeze",
+          "weight": 3,
+          "kind": "adjacent_all",
+          "damage": 1,
+          "status": {
+            "status": "exposed",
+            "stacks": 1
+          }
+        }
+      ]
+    }
+  ],
+  "encounters": [
+    {
+      "id": "S01",
+      "name": "1층 복도 — 처음부터 소란",
+      "board": "grid2x7",
+      "playerStart": "r0c1",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "duelist",
+          "node": "r0c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r1c3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r1c5"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "첫 전투: 의자+먼지 둘, 위치 선택/광역/연속 공격 가치를 3~5턴 안에 학습. 체력만 늘리기 금지",
+      "variants": [
+        {
+          "id": "S01-A",
+          "label": "복도의 의자와 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "duelist",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r1c3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "name": "공동 세탁실",
+      "board": "grid2x7",
+      "playerStart": "r0c1",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "grunt",
+          "node": "r0c5"
+        },
+        {
+          "id": "e2",
+          "archetype": "grunt",
+          "node": "r1c5"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r0c6"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r1c6"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "초기 다수전; 광역 공격 가치 측정",
+      "variants": [
+        {
+          "id": "S02-A",
+          "label": "접시 둘과 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "grunt",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c6"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r1c6"
+            }
+          ]
+        },
+        {
+          "id": "S02-B",
+          "label": "뚜껑 하나와 먼지들",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r0c5"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r1c5"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "name": "순환 계단",
+      "board": "ring8",
+      "playerStart": "r0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "hunter",
+          "node": "r4"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r5"
+        }
+      ],
+      "objective": "survive",
+      "turnLimit": 5,
+      "designNote": "5번의 적 행동 단계에서 살아남기",
+      "variants": [
+        {
+          "id": "S03-A",
+          "label": "그림자와 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r5"
+            }
+          ]
+        },
+        {
+          "id": "S03-B",
+          "label": "그림자와 작은 접시",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "hunter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "name": "막힌 현관",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "brute",
+          "node": "r1c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r2c3"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "거센 단일 적과 약한 다수",
+      "variants": [
+        {
+          "id": "S04-A",
+          "label": "옷장과 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        },
+        {
+          "id": "S04-B",
+          "label": "옷장과 접시 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "name": "냉장고 속",
+      "board": "grid3x5",
+      "playerStart": "r1c1",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "poisoner",
+          "node": "r0c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "grunt",
+          "node": "r1c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "grunt",
+          "node": "r2c4"
+        },
+        {
+          "id": "e4",
+          "archetype": "grunt",
+          "node": "r2c3"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "중독과 다수전",
+      "variants": [
+        {
+          "id": "S05-A",
+          "label": "잼 병과 접시 셋",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r1c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e4",
+              "archetype": "grunt",
+              "node": "r2c3"
+            }
+          ]
+        },
+        {
+          "id": "S05-B",
+          "label": "잼 병과 먼지 셋",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "poisoner",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r1c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r1c4"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r0c3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "name": "고장 난 엘리베이터",
+      "board": "fork10",
+      "playerStart": "s0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "clockmaker",
+          "node": "a2"
+        },
+        {
+          "id": "e2",
+          "archetype": "marksman",
+          "node": "b2"
+        }
+      ],
+      "objective": "kill_target",
+      "turnLimit": 7,
+      "designNote": "7턴 이내 시계공 처치",
+      "targetEnemyId": "e1",
+      "variants": [
+        {
+          "id": "S06-A",
+          "label": "시계공과 사수",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a2"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "b2"
+            }
+          ]
+        },
+        {
+          "id": "S06-B",
+          "label": "시계공과 접시 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "clockmaker",
+              "node": "a2"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "b1"
+            },
+            {
+              "id": "e3",
+              "archetype": "grunt",
+              "node": "b2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "name": "옥상",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "marksman",
+          "node": "r0c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "marksman",
+          "node": "r2c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "harrier",
+          "node": "r1c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e5",
+          "archetype": "dust",
+          "node": "r2c3"
+        }
+      ],
+      "objective": "kill_all",
+      "designNote": "장거리 압박과 우선순위 선택",
+      "variants": [
+        {
+          "id": "S07-A",
+          "label": "우산 둘과 구두, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r1c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        },
+        {
+          "id": "S07-B",
+          "label": "우산 하나, 구두 둘, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "marksman",
+              "node": "r0c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r1c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "name": "404호",
+      "board": "ring8",
+      "playerStart": "r0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "arbiter",
+          "node": "r4"
+        },
+        {
+          "id": "e2",
+          "archetype": "harrier",
+          "node": "r2"
+        },
+        {
+          "id": "e3",
+          "archetype": "harrier",
+          "node": "r6"
+        }
+      ],
+      "objective": "survive",
+      "turnLimit": 6,
+      "designNote": "6턴 생존 또는 적 전멸",
+      "variants": [
+        {
+          "id": "S08-A",
+          "label": "재판관과 구두 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2"
+            },
+            {
+              "id": "e3",
+              "archetype": "harrier",
+              "node": "r6"
+            }
+          ]
+        },
+        {
+          "id": "S08-B",
+          "label": "재판관과 접시 둘, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "arbiter",
+              "node": "r4"
+            },
+            {
+              "id": "e2",
+              "archetype": "grunt",
+              "node": "r2"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3"
+            },
+            {
+              "id": "e5",
+              "archetype": "dust",
+              "node": "r5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S09",
+      "name": "관리실",
+      "board": "grid4x4",
+      "playerStart": "r2c0",
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "boss",
+          "node": "r1c3"
+        },
+        {
+          "id": "e2",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r2c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r3c3"
+        }
+      ],
+      "objective": "kill_target",
+      "turnLimit": 9,
+      "designNote": "9턴 이내 보스 처치",
+      "targetEnemyId": "e1",
+      "variants": [
+        {
+          "id": "S09-A",
+          "label": "최후의 심판자와 먼지 셋",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "boss",
+              "node": "r1c3"
+            },
+            {
+              "id": "e2",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r3c3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "name": "벽 속 복도",
+      "board": "grid3x5",
+      "playerStart": "r1c0",
+      "objective": "kill_all",
+      "designNote": "후반 혼합 조합; S09 이전 단계",
+      "variants": [
+        {
+          "id": "S10-A",
+          "label": "뚜껑, 구두, 먼지 둘",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "guard",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "harrier",
+              "node": "r2c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r0c3"
+            },
+            {
+              "id": "e4",
+              "archetype": "dust",
+              "node": "r0c4"
+            }
+          ]
+        },
+        {
+          "id": "S10-B",
+          "label": "옷장과 우산, 먼지",
+          "enemies": [
+            {
+              "id": "e1",
+              "archetype": "brute",
+              "node": "r1c4"
+            },
+            {
+              "id": "e2",
+              "archetype": "marksman",
+              "node": "r0c4"
+            },
+            {
+              "id": "e3",
+              "archetype": "dust",
+              "node": "r2c3"
+            }
+          ]
+        }
+      ],
+      "enemies": [
+        {
+          "id": "e1",
+          "archetype": "guard",
+          "node": "r1c4"
+        },
+        {
+          "id": "e2",
+          "archetype": "harrier",
+          "node": "r2c4"
+        },
+        {
+          "id": "e3",
+          "archetype": "dust",
+          "node": "r0c3"
+        },
+        {
+          "id": "e4",
+          "archetype": "dust",
+          "node": "r0c4"
+        }
+      ]
+    }
+  ],
+  "relics": [
+    {
+      "id": "R01",
+      "name": "예언자의 눈",
+      "effect": "short_rest_look_at_two_choose_one_to_lose",
+      "description": "휴식 시 무작위 후보 2장을 공개해 1장 선택. 무작위성이 줄어드는 강한 유물."
+    },
+    {
+      "id": "R02",
+      "name": "여분의 장부",
+      "effect": "deck_cap_plus_one",
+      "description": "출전 매수 제한 +1. 보유 카드 풀이 충분해야 편성 가능."
+    },
+    {
+      "id": "R03",
+      "name": "소실의 흔적",
+      "effect": "heal_3_first_loss_per_encounter",
+      "description": "해당 전투에서 첫 카드 소실이 일어날 때 체력 3 회복."
+    },
+    {
+      "id": "R04",
+      "name": "돌아보는 발걸음",
+      "effect": "once_per_encounter_move_one_after_completed_top",
+      "description": "전투당 1회 상단 행동 완료 직후 이동 1. 추가 카드 사용 없음."
+    }
+  ],
+  "designVersion": "0.3",
+  "run": {
+    "totalBattles": 10,
+    "zones": [
+      {
+        "id": "residential",
+        "name": "일반 거주 구역",
+        "stages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "misaligned",
+        "name": "어긋난 층",
+        "stages": [
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "id": "missing",
+        "name": "존재하지 않는 층",
+        "stages": [
+          8,
+          9,
+          10
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage": 1,
+        "encounter": "S01"
+      },
+      {
+        "stage": 2,
+        "encounter": "S02"
+      },
+      {
+        "stage": 3,
+        "encounter": "S04"
+      },
+      {
+        "stage": 4,
+        "encounter": "S03"
+      },
+      {
+        "stage": 5,
+        "encounter": "S05"
+      },
+      {
+        "stage": 6,
+        "encounter": "S06"
+      },
+      {
+        "stage": 7,
+        "encounter": "S07"
+      },
+      {
+        "stage": 8,
+        "encounter": "S08"
+      },
+      {
+        "stage": 9,
+        "encounter": "S10"
+      },
+      {
+        "stage": 10,
+        "encounter": "S09"
+      }
+    ],
+    "routeChoice": "choose_one_of_encounter_variants_before_each_stage; fixed single variant for stages 1 and 10",
+    "afterBattleRewards": {
+      "card": true,
+      "upgrade": true,
+      "relic": true,
+      "heal": true
+    },
+    "zoneBreaksAfterStages": [
+      3,
+      7
+    ],
+    "zoneBreakChoice": [
+      {
+        "type": "heal",
+        "amount": 8
+      },
+      {
+        "type": "upgrade",
+        "count": 1
+      }
+    ],
+    "notes": "Two candidates in stages 2-9 are predefined A/B variants (not random spawns). Draw selections before encounter using seed; skip obsolete 5-battle route logic."
+  },
+  "balanceTargets": {
+    "regularTurns": [
+      4,
+      6
+    ],
+    "eliteTurns": [
+      6,
+      8
+    ],
+    "bossTurns": [
+      7,
+      9
+    ],
+    "playtestOnly": true,
+    "firstBattleTurns": [
+      3,
+      5
+    ],
+    "firstBattleNotes": "첫 전투 3~5턴 목표, 불합리한 첫턴 확정 피해를 강요하지 않을 것. 시드군 실측 전 확정 아님.",
+    "difficultyV03": "일반 전투 조금 더 도전적. 일부 적 의도에 출혈/속박/무장해제 부여; 과도한 확정 피해/적 간 오발 금지."
+  },
+  "cardRulesNote": "출전 기본 8장. 예비 카드 없음. 보상 C09~C20. 기존 저장에서 중복/삭제된 C09/C10 소유 카드와 출전 덱을 마이그레이션할 것.",
+  "statusDefinitions": {
+    "exposed": {
+      "stacking": "add",
+      "trigger": "successful_attack_hit",
+      "damageBonusPerHit": 2,
+      "consumePerHit": 1,
+      "affected": "receiver",
+      "note": "적중 1회마다 적용; HP가 아니라 방어도에 흡수되어도 적중은 적중"
+    },
+    "weak": {
+      "stacking": "add",
+      "trigger": "attack_resolved",
+      "damagePenaltyPerAttack": 2,
+      "consumePerAttack": 1,
+      "affected": "attacker",
+      "note": "하나의 공격 이벤트마다 감소, 다단 공격 각 개별 이벤트. 최소 피해 0"
+    },
+    "poison": {
+      "stacking": "add",
+      "trigger": "owner_turn_end",
+      "damageHp": 2,
+      "consumeAtOwnerTurnEnd": 1,
+      "bypassBlock": true,
+      "note": "적은 의도 실행 뒤, 플레이어는 상하단 행동 종료 뒤 틱"
+    },
+    "disarm": {
+      "stacking": "add",
+      "trigger": "owner_turn_end",
+      "skip": "all_attack_steps",
+      "consumeAtOwnerTurnEnd": 1,
+      "note": "해당 턴 공격 step 전부 생략; 이동, 방어, 회복 및 독립 status는 정상; 공격 뒤 last_attack_target 참조 step은 유효 타깃 없으면 생략"
+    },
+    "bind": {
+      "stacking": "add",
+      "trigger": "attempt_move_action",
+      "skip": "one_move_step",
+      "consumePerSkippedMoveStep": 1,
+      "note": "이동 거리와 무관 이동 step 하나가 생략될 때만 1 감소. 이동 시도가 없으면 지속"
+    },
+    "bleed": {
+      "stacking": "add",
+      "trigger": "owner_turn_end",
+      "damageHpEqualToStacks": true,
+      "bypassBlock": true,
+      "removeOn": "next_positive_block_or_heal_effect",
+      "consumeReplacementEffect": true,
+      "note": "확정: 방어도 획득이나 치료 효과 1건을 소모하여 출혈 전체 제거. 방어도 및 치료 수치는 적용하지 않으며 같은 행동의 다음 단계는 계속 진행한다."
+    }
+  },
+  "statusImplementationNote": "확정 상태이상은 노출/약화/중독/무장해제/속박/출혈 6종. 기절은 과거 논의된 후보지만 최신 확정 카드 목록에는 없어 이번 구현에서 추가하지 않음.",
+  "combatTargetingPolicy": {
+    "default_enemy_vs_enemy_damage": false,
+    "default_enemy_vs_enemy_status": false,
+    "player_aoe_hits": "all adjacent enemies only",
+    "marked_when_player_leaves": "miss; do not hit enemy standing in marked tile",
+    "future_caretaker_exception": "not implemented; explicit allowFriendlyFire flag required"
+  },
+  "contentHistory": {
+    "base": "game_content.v0.2.json",
+    "presentationBase": "presentation.ko.v0.2.1.json",
+    "changes": [
+      "visitor_cards_replaced",
+      "six_status_definitions",
+      "S01_three_enemies_grid2x7",
+      "selected_enemy_intents_status",
+      "minor_duelist_hp_reduction",
+      "no_asciiportraits_render",
+      "bleed_replacement_user_confirmed",
+      "UI_dark_shell_light_cards_and_all_screens"
+    ]
+  },
+  "statusSemantics": {
+    "actorTurnEnd": "플레이어는 자신이 선택한 상단/하단 실행이 끝난 직후, 적은 자신의 예고 행동을 실행하고 난 직후에 상태이상 턴 종료 처리. 그 유닛에게 턴이 실제로 주어졌다면 기절/무장해제로 행동이 없어도 처리.",
+    "statusEndOrder": [
+      "poison",
+      "bleed",
+      "disarm"
+    ],
+    "directHpLoss": "중독/출혈/자신의 체력 소모는 방어도를 무시하며 공격 타격으로 계산하지 않음. 기존 피해 무효화(공격 타격)로 취소 불가.",
+    "bind": "이동 step을 실행하려는 순간 속박>0이면 그 step 전체를 취소하고 속박 1 감소. 이동 거리와 무관. 유효한 이동 step 자체가 발생하지 않으면 감소하지 않음.",
+    "bleedReplacement": "방어도 획득 또는 체력 회복의 양수가 될 효과를 1회 소모하여 출혈 0, 획득/회복 0. 반격 등 후속 독립 step은 유지. 적의 heal/block에도 동일.",
+    "disarm": "공격 step 전체를 생략. 해당 공격의 적중을 전제로 하는 follow-up status/last_attack_target push 등은 함께 생략. 독립된 이동/방어/치료/상태 부여는 정상. owner turn 종료에 1 감소.",
+    "weakExposed": "타격 이벤트별 별도 소모. 공격이 유효하게 실행된 경우 약화 1 감소, 실제 피격을 받은 경우 노출 1 감소. 상태 피해는 공격 타격 아님.",
+    "enemyPreMove": "적 이동은 플레이어 행동 전에 선행. 이번 플레이어 턴에 적에게 건 속박은 다음 턴의 적 사전 이동부터 작동.",
+    "noEnemyFriendlyFire": "적은 기본적으로 적에게 공격/상태이상 불가. 미래 관리인 직업용 명시적 예외 API만 남겨두고 미구현."
+  }
+}

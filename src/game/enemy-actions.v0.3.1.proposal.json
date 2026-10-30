@@ -1,0 +1,805 @@
+{
+  "version": "0.3.1-proposal-1",
+  "status": "playtest_proposal_not_approved",
+  "source": "design/v0.3.1/ENEMY_ACTIONS_PROPOSAL.md",
+  "enemies": {
+    "duelist": [
+      {
+        "id": "advance",
+        "weight": 5,
+        "previewLabel": "다가와 다리 걸기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "leave",
+        "weight": 3,
+        "previewLabel": "걷어차고 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 2
+          }
+        ]
+      },
+      {
+        "id": "reprimand",
+        "weight": 2,
+        "previewLabel": "윽박지르고 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 1,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "exposed",
+              "stacks": 1
+            }
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      }
+    ],
+    "grunt": [
+      {
+        "id": "charge",
+        "weight": 4,
+        "previewLabel": "미끄러져 들이받기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "shard_cut",
+        "weight": 4,
+        "previewLabel": "깨진 모서리로 긁기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 1,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "bleed",
+              "stacks": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fragment",
+        "weight": 2,
+        "previewLabel": "조각 던지고 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 2,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      }
+    ],
+    "guard": [
+      {
+        "id": "shield_bash",
+        "weight": 5,
+        "previewLabel": "밀어붙여 자리 빼앗기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "push",
+            "distance": 1,
+            "targetPolicy": "last_attack_target"
+          }
+        ]
+      },
+      {
+        "id": "brace",
+        "weight": 3,
+        "previewLabel": "닫히며 들이받기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "block",
+            "amount": 3
+          },
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "occupy",
+        "weight": 2,
+        "previewLabel": "다가와 길 막기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "block",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "harrier": [
+      {
+        "id": "rush",
+        "weight": 5,
+        "previewLabel": "서둘러 달려들기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 3
+          },
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "cut",
+        "weight": 3,
+        "previewLabel": "걷어차고 빠지기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      },
+      {
+        "id": "trip",
+        "weight": 2,
+        "previewLabel": "발목 걸고 달아나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 1,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "bind",
+              "stacks": 1
+            }
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 2
+          }
+        ]
+      }
+    ],
+    "marksman": [
+      {
+        "id": "aim",
+        "weight": 5,
+        "previewLabel": "우산 끝 겨누기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "marked",
+            "damage": 6,
+            "range": 4,
+            "targetPolicy": "marked_tile"
+          }
+        ]
+      },
+      {
+        "id": "leave",
+        "weight": 3,
+        "previewLabel": "물방울 쏘고 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 3,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 2
+          }
+        ]
+      },
+      {
+        "id": "keep_fire",
+        "weight": 2,
+        "previewLabel": "거리 잡고 겨누기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "maintain_range",
+            "maxSteps": 2,
+            "preferredRange": 3
+          },
+          {
+            "kind": "marked",
+            "damage": 4,
+            "range": 3,
+            "targetPolicy": "marked_tile"
+          }
+        ]
+      }
+    ],
+    "poisoner": [
+      {
+        "id": "venom",
+        "weight": 5,
+        "previewLabel": "한 숟갈 권하고 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 2,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "poison",
+              "stacks": 1
+            }
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      },
+      {
+        "id": "cloud",
+        "weight": 3,
+        "previewLabel": "뚜껑 열어 놓기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "marked",
+            "damage": 2,
+            "range": 3,
+            "targetPolicy": "marked_tile",
+            "status": {
+              "status": "poison",
+              "stacks": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "keep_venom",
+        "weight": 2,
+        "previewLabel": "거리 잡고 잼 튀기기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "maintain_range",
+            "maxSteps": 2,
+            "preferredRange": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 2,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "poison",
+              "stacks": 1
+            }
+          }
+        ]
+      }
+    ],
+    "brute": [
+      {
+        "id": "strike",
+        "weight": 5,
+        "previewLabel": "다가와 문짝 휘두르기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 6,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "double",
+        "weight": 3,
+        "previewLabel": "문짝 연달아 닫기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "windup",
+        "weight": 2,
+        "previewLabel": "들이받고 서랍 흔들기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 5,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "buff_attack",
+            "amount": 2
+          }
+        ]
+      }
+    ],
+    "clockmaker": [
+      {
+        "id": "jab",
+        "weight": 4,
+        "previewLabel": "들이받고 자리 바꾸기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 3,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "maintain_range",
+            "maxSteps": 1,
+            "preferredRange": 3
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "weight": 3,
+        "previewLabel": "늦었다고 붙잡기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "marked",
+            "damage": 2,
+            "range": 3,
+            "targetPolicy": "marked_tile",
+            "status": {
+              "status": "bind",
+              "stacks": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "guard",
+        "weight": 3,
+        "previewLabel": "들이받고 바늘 뒤에 숨기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 3,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "block",
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "hunter": [
+      {
+        "id": "chase",
+        "weight": 5,
+        "previewLabel": "따라와 붙잡기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 3
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "weave",
+        "weight": 3,
+        "previewLabel": "붙잡고 빠지기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      },
+      {
+        "id": "bind",
+        "weight": 2,
+        "previewLabel": "발목 붙잡기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 1,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "bind",
+              "stacks": 1
+            }
+          }
+        ]
+      }
+    ],
+    "arbiter": [
+      {
+        "id": "smite",
+        "weight": 4,
+        "previewLabel": "다가와 버릇 고쳐 주기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 6,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "weaken",
+        "weight": 3,
+        "previewLabel": "얌전히 하라고 꾸짖기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 2,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "weak",
+              "stacks": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "order",
+        "weight": 2,
+        "previewLabel": "손 비우라며 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 1,
+            "range": 2,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "disarm",
+              "stacks": 1
+            }
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      },
+      {
+        "id": "guard",
+        "weight": 1,
+        "previewLabel": "훈계하며 길 막기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "block",
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "boss": [
+      {
+        "id": "slam",
+        "weight": 4,
+        "previewLabel": "다가와 밀어내기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 6,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "push",
+            "distance": 1,
+            "targetPolicy": "last_attack_target"
+          }
+        ]
+      },
+      {
+        "id": "double",
+        "weight": 3,
+        "previewLabel": "다가와 연달아 닫히기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          },
+          {
+            "kind": "attack",
+            "damage": 4,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "marked",
+        "weight": 2,
+        "previewLabel": "출입 금지하고 물러나기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "marked",
+            "damage": 6,
+            "range": 3,
+            "targetPolicy": "marked_tile"
+          },
+          {
+            "kind": "move",
+            "mode": "retreat",
+            "maxSteps": 1
+          }
+        ]
+      },
+      {
+        "id": "order",
+        "weight": 1,
+        "previewLabel": "손잡이 놓게 하기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 3,
+            "range": 2,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "disarm",
+              "stacks": 1
+            }
+          }
+        ]
+      }
+    ],
+    "dust": [
+      {
+        "id": "rush",
+        "weight": 5,
+        "previewLabel": "먼지 몰려오기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 2
+          },
+          {
+            "kind": "attack",
+            "damage": 1,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "nudge",
+        "weight": 3,
+        "previewLabel": "다가와 부딪치기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "move",
+            "mode": "approach",
+            "maxSteps": 1
+          },
+          {
+            "kind": "attack",
+            "damage": 2,
+            "range": 1,
+            "targetPolicy": "player_current"
+          }
+        ]
+      },
+      {
+        "id": "sneeze",
+        "weight": 2,
+        "previewLabel": "재채기 날리기",
+        "kind": "sequence",
+        "steps": [
+          {
+            "kind": "attack",
+            "damage": 1,
+            "range": 2,
+            "targetPolicy": "player_current",
+            "status": {
+              "status": "exposed",
+              "stacks": 1
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
