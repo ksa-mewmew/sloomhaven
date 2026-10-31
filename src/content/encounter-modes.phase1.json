@@ -245,11 +245,6 @@
               "id": "e2",
               "archetype": "grunt",
               "node": "r0c4"
-            },
-            {
-              "id": "e3",
-              "archetype": "dust",
-              "node": "r3c4"
             }
           ],
           "duo": [
@@ -267,11 +262,6 @@
               "id": "e3",
               "archetype": "grunt",
               "node": "r2c4"
-            },
-            {
-              "id": "e4",
-              "archetype": "dust",
-              "node": "r3c4"
             }
           ]
         }

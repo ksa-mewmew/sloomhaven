@@ -2,7 +2,7 @@ import legacyPhase0 from "../content/legacy-phase0.json";
 import { LEGACY_RULES } from "../game/rulesets";
 import { validateFoundation } from "../game/foundation";
 import { RulesGuide } from "./RulesGuide";
-import { economy, economyTrial, itemById, relicById } from "../game/economy";
+import { economy, itemById, relicById } from "../game/economy";
 import { DeckEditor, CardComparison, UpgradePicker } from "./DeckEditor";
 import { StatusHelp } from "./StatusHelp";
 import {
@@ -83,7 +83,6 @@ export default function App() {
     ]),
     [practiceCap, setPC] = useState(8),
     [relics, setRelics] = useState<string[]>([]),
-    [rewardPick, setRP] = useState<string>(),
     [textScale, setTextScale] = useState(
       () => localStorage.getItem("third-day/text-scale") ?? "100",
     ),
@@ -144,7 +143,6 @@ export default function App() {
             next.battle!.variant,
         );
       setRun(next);
-      setRP(undefined);
     });
   }
   function dispatch(c: Command) {
@@ -175,7 +173,6 @@ export default function App() {
   const menu = () => {
     setPage("menu");
     setError("");
-    setRP(undefined);
   };
   const current =
     page === "practiceBattle"
@@ -249,7 +246,6 @@ export default function App() {
                     { type: "report" },
                   ),
                 );
-                setRP(undefined);
               } else {
                 const measured = applyCommand(current, command);
                 localStorage.setItem(
@@ -804,201 +800,64 @@ export default function App() {
                     {run.stage === "start"
                       ? "기본 자금 100G 지급 완료. 추가 지급 없이 시작 상점으로 진행합니다."
                       : run.stage === "reward"
-                        ? `골드 +${run.rewardGold}G 지급 완료. 추가 보상은 ${run.rewardType} 한 종류입니다.`
+                        ? `승리 골드 +${run.rewardGold}G 지급 완료. 후보 중 하나를 획득하세요.`
                         : "구역 보급을 받습니다. 강화 기능은 현재 비활성화했습니다."}
                   </p>
-                  <CardComparison
-                    owned={run.owned}
-                    equipped={run.equipped}
-                    upgrades={run.upgrades}
-                    ruleset={run.ruleset}
-                  />
-                  <p>
-                    회복은 출혈이 있으면 그 효과 한 번을 소모해 출혈만
-                    제거합니다.
-                  </p>
-                  <div className="choices">
+                  <div className="reward-offers">
                     {run.rewards.map((reward) => (
-                      <section className="panel reward-panel" key={reward.id}>
+                      <section className="reward-panel" key={reward.id} data-reward={reward.kind}>
                         <h3>{rewardTitle(reward)}</h3>
-                        {reward.kind === "relic" && (
-                          <p>{relicFlavor(reward.relic!)}</p>
-                        )}
-                        {reward.kind === "relic" && (
-                          <p>
-                            {
-                              economy.relics.find((x) => x.id === reward.relic)
-                                ?.description
-                            }
-                          </p>
-                        )}
-                        <button
-                          onClick={() => setRP(reward.id)}
-                          aria-pressed={rewardPick === reward.id}
-                        >
-                          이 보상 선택
-                        </button>
-                        {rewardPick === reward.id && (
-                          <>
-                            {reward.kind === "item" ? (
-                              <div>
-                                {reward.items?.map((id) => (
-                                  <div key={id}>
-                                    <h3>{itemById[id].name}</h3>
-                                    <p>{itemById[id].description}</p>
-                                    <button
-                                      onClick={() =>
-                                        send({
-                                          type: "reward",
-                                          id: reward.id,
-                                          card: id,
-                                        })
-                                      }
-                                    >
-                                      {itemById[id].name} 획득
-                                    </button>
-                                  </div>
-                                ))}
-                              </div>
-                            ) : reward.kind === "card" ? (
-                              <div>
-                                {reward.cards?.map((id) => (
-                                  <div key={id}>
-                                    <CardView id={id} ruleset={run.ruleset} />
-                                    <button
-                                      className="primary"
-                                      onClick={() =>
-                                        send({
-                                          type: "reward",
-                                          id: reward.id,
-                                          card: id,
-                                        })
-                                      }
-                                    >
-                                      {cards[id].name} 획득
-                                    </button>
-                                  </div>
-                                ))}
-                              </div>
-                            ) : reward.kind === "upgrade" ? (
-                              <UpgradePicker
-                                options={upgradesAvailable(run)}
-                                upgrades={run.upgrades}
-                    ruleset={run.ruleset}
-                                onChoose={(card, side) =>
-                                  send({
-                                    type: "reward",
-                                    id: reward.id,
-                                    card,
-                                    side,
-                                  })
-                                }
-                              />
-                            ) : (
-                              <button
-                                className="primary"
-                                onClick={() =>
-                                  send({ type: "reward", id: reward.id })
-                                }
-                              >
-                                보상 확정
-                              </button>
-                            )}
-                          </>
+                        {reward.kind === "card" ? (
+                          <div className="offer-grid card-offers">
+                            {reward.cards?.map((id) => (
+                              <section className="offer-tile" key={id}>
+                                <CardView id={id} ruleset={run.ruleset} />
+                                <button className="primary" onClick={() => send({type: "reward", id: reward.id, card: id})}>{cards[id].name} 획득</button>
+                              </section>
+                            ))}
+                          </div>
+                        ) : reward.kind === "item" ? (
+                          <div className="offer-grid compact-offers">
+                            {reward.items?.map((id) => (
+                              <section className="offer-tile panel" key={id}>
+                                <h3>{itemById[id].name}</h3>
+                                <p>{itemById[id].description}</p>
+                                <button className="primary" onClick={() => send({type: "reward", id: reward.id, card: id})}>{itemById[id].name} 획득</button>
+                              </section>
+                            ))}
+                          </div>
+                        ) : reward.kind === "upgrade" ? (
+                          <UpgradePicker options={upgradesAvailable(run)} upgrades={run.upgrades} ruleset={run.ruleset} onChoose={(card, side) => send({type: "reward", id: reward.id, card, side})} />
+                        ) : (
+                          <div className="offer-tile panel">
+                            {reward.kind === "relic" && <p>{relicById[reward.relic!].description}</p>}
+                            <button className="primary" onClick={() => send({type: "reward", id: reward.id})}>{reward.kind === "relic" ? relicById[reward.relic!].name + " 획득" : "계속"}</button>
+                          </div>
                         )}
                       </section>
                     ))}
                   </div>
+                  {run.stage === "reward" && <details className="reward-comparison"><summary>보유 카드 비교</summary><CardComparison owned={run.owned} equipped={run.equipped} upgrades={run.upgrades} ruleset={run.ruleset} /></details>}
                 </>
               )}
-              <p className="economy-trial">
-                확정 경제: 승리당 {economyTrial.goldPerWin}G · 카드 3/아이템 2
-                중 1 · 아이템 2칸 · 중복 없음. 후보 고갈 시 추가 30G. 강화/회복
-                상점 서비스 없음.
-              </p>
               {run.stage === "shop" && (
-                <section className="panel">
-                  <h2>
-                    {run.completed.length === 0
-                      ? "시작 상점 · 일반 유물 전용"
-                      : "상점 · 등급 조합 무제한"}
-                  </h2>
-                  <p>
-                    보유 {run.gold}G · 시작 자금 100G는 한 번만 지급합니다.
-                    가격은 시드에 따라 대역 안에서 결정되며 방문 중 유지됩니다.
-                    구매 시 품절 · 재입고/환불 없음. 보유 중복을 제외해 풀이
-                    고갈되면 빈 재고를 대체하지 않습니다.
-                  </p>
-                  <div className="grid">
-                    {run.stock.map((x) => (
-                      <section
-                        className="panel shop-product"
-                        key={x.key}
-                        data-stock={x.key}
-                      >
-                        <p className="product-kind">
-                          {x.kind === "card"
-                            ? "카드 · 출전 덱에 편성"
-                            : x.kind === "item"
-                              ? "아이템 · 전투 중 사용 / 장착"
-                              : "유물 · 지속/조건부 효과"}
-                        </p>
-                        {x.kind === "item" && (
-                          <p>
-                            전투당 1회 ·{" "}
-                            {itemById[x.id].recharge_on_short_rest
-                              ? "짧은 휴식 후 재충전"
-                              : "다음 전투 재충전"}
-                          </p>
-                        )}
-                        <h3>
-                          {x.kind === "card"
-                            ? cards[x.id].name
-                            : x.kind === "item"
-                              ? itemById[x.id].name
-                              : relicById[x.id].name}
-                        </h3>
-                        <p>
-                          {x.kind === "card"
-                            ? "카드"
-                            : x.kind === "item"
-                              ? itemById[x.id].description
-                              : relicById[x.id].description}
-                        </p>
-                        {x.kind === "card" && (
-                          <details>
-                            <summary>카드 양면 상세</summary>
-                            <CardView id={x.id} ruleset={run.ruleset} />
-                          </details>
-                        )}
-                        {x.kind === "relic" && (
-                          <p>
-                            {relicById[x.id].rarity} ·{" "}
-                            {relicById[x.id].acquisition === "shop_only"
-                              ? "상점 전용"
-                              : "상점/전투"}
-                          </p>
-                        )}
-                        <button
-                          disabled={x.sold || run.gold < x.price}
-                          onClick={() => send({ type: "buy", key: x.key })}
-                        >
-                          {x.sold
-                            ? "품절"
-                            : run.gold < x.price
-                              ? "골드 부족"
-                              : "구매"}{" "}
-                          · {x.price}G
-                        </button>
-                      </section>
-                    ))}
-                  </div>
-                  <button
-                    className="primary"
-                    onClick={() => send({ type: "leaveShop" })}
-                  >
-                    상점 나가기
-                  </button>
+                <section className="panel shop-screen">
+                  <header className="shop-heading"><h2>상점</h2><strong>{run.gold}G</strong>{run.completed.length === 0 && <small>시작 상점 · 일반 유물</small>}</header>
+                  {(["card", "item", "relic"] as const).map(kind => (
+                    <section className="shop-section" key={kind} data-shop-kind={kind}>
+                      <h3>{kind === "card" ? "카드" : kind === "item" ? "아이템" : "유물"}</h3>
+                      <div className={"offer-grid " + (kind === "card" ? "card-offers" : "compact-offers")}>
+                        {run.stock.filter(x => x.kind === kind).map(x => (
+                          <section className={"offer-tile shop-product " + (kind === "card" ? "" : "panel")} key={x.key} data-stock={x.key}>
+                            {kind === "card" ? <CardView id={x.id} ruleset={run.ruleset} /> : <><h4>{kind === "item" ? itemById[x.id].name : relicById[x.id].name}</h4><p>{kind === "item" ? itemById[x.id].description : relicById[x.id].description}</p></>}
+                            <div className="offer-purchase"><strong>{x.price}G</strong><button disabled={x.sold || run.gold < x.price} onClick={() => send({type: "buy", key: x.key})}>{x.sold ? "품절" : run.gold < x.price ? "골드 부족" : "구매"}</button></div>
+                          </section>
+                        ))}
+                      </div>
+                      {!run.stock.some(x => x.kind === kind) && <p>재고 없음</p>}
+                    </section>
+                  ))}
+                  <button className="primary" onClick={() => send({type: "leaveShop"})}>상점 나가기</button>
                 </section>
               )}
               {run.stage === "map" && (
@@ -1098,7 +957,6 @@ export default function App() {
                     className="primary"
                     onClick={() => {
                       setRun(createRun(run.seed));
-                      setRP(undefined);
                     }}
                   >
                     같은 시드로 새 런

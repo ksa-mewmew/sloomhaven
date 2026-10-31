@@ -3210,7 +3210,7 @@
         },
         {
           "id": "S04-B",
-          "label": "옷장과 접시 하나, 먼지 하나",
+          "label": "옷장과 접시 하나",
           "enemies": [
             {
               "id": "e1",
@@ -3221,11 +3221,6 @@
               "id": "e2",
               "archetype": "grunt",
               "node": "r0c4"
-            },
-            {
-              "id": "e3",
-              "archetype": "dust",
-              "node": "r3c4"
             }
           ]
         }

@@ -109,12 +109,14 @@ export function CardView({
   id,
   onPick,
   selected,
+  selectedSide,
   upgrade = [],
   ruleset,
 }: {
   id: string;
   onPick?: (side: Side) => void;
   selected?: string;
+  selectedSide?: Side;
   upgrade?: Side[];
   ruleset?: Battle["ruleset"];
 }) {
@@ -126,7 +128,7 @@ export function CardView({
         <strong>{c.name}</strong>
       </header>
       {(["top", "bottom"] as const).map((side) => (
-        <div className="face" key={side} role={onPick ? "button" : undefined} tabIndex={onPick ? 0 : undefined} aria-describedby={onPick ? descriptionId + side : undefined} aria-label={c.name + " " + (side === "top" ? "상단" : "하단") + " 선택" + (c[side].loss ? " · 소실" : "")} onClick={onPick ? (e) => { e.stopPropagation(); onPick(side); } : undefined} onKeyDown={onPick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); onPick(side); } } : undefined}>
+        <div className={"face" + (selectedSide === side ? " face-selected" : "")} key={side} aria-pressed={onPick ? selectedSide === side : undefined} role={onPick ? "button" : undefined} tabIndex={onPick ? 0 : undefined} aria-describedby={onPick ? descriptionId + side : undefined} aria-label={c.name + " " + (side === "top" ? "상단" : "하단") + " 선택" + (c[side].loss ? " · 소실" : "")} onClick={onPick ? (e) => { e.stopPropagation(); onPick(side); } : undefined} onKeyDown={onPick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); onPick(side); } } : undefined}>
           <b>
             <span className="sr-only">{sideName(side)}</span>{upgrade.includes(side) ? "＋ 강화" : ""}{" "}
             {c[side].loss && <em>소실</em>}
@@ -760,8 +762,8 @@ export function BattleScreen({
                 } as CSSProperties
               }
             >
-              <CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} onPick={ready ? side => toggleCard(id,side) : undefined} />
-              {(hover || focusCard) === id && <div className="card-hover-copy" aria-hidden="true"><CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} /></div>}
+              <CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} selectedSide={top?.card === id ? "top" : bottom?.card === id ? "bottom" : undefined} onPick={ready ? side => toggleCard(id,side) : undefined} />
+              {(hover || focusCard) === id && <div className="card-hover-copy" aria-hidden="true"><CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} selectedSide={top?.card === id ? "top" : bottom?.card === id ? "bottom" : undefined} /></div>}
               <span className="hand-selection">
                 {selected.includes(id)
                   ? "✓ 선택 " + (selected.indexOf(id) + 1)
@@ -810,7 +812,7 @@ export function BattleScreen({
           <div className="full-card-grid">
             {s.zones.hand.map((id) => (
               <div key={id}>
-                <CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} onPick={side => toggleCard(id,side)} />
+                <CardView id={id} upgrade={s.upgrades[id]} ruleset={s.ruleset} selectedSide={top?.card === id ? "top" : bottom?.card === id ? "bottom" : undefined} onPick={side => toggleCard(id,side)} />
                 <button onClick={() => toggleCard(id)} disabled={!ready}>
                   {selected.includes(id) ? "✓ 선택 해제" : "이 카드 선택"}
                 </button>
